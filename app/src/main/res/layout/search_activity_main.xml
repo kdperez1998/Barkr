@@ -17,7 +17,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu" >
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -30,7 +32,152 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/mobile_navigation" />
 
+    <ImageButton
+        android:id="@+id/FavoriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:srcCompat="@android:drawable/btn_star_big_off"
+        tools:layout_editor_absoluteX="339dp" />
+
+    <EditText
+        android:id="@+id/TextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:capitalize="words"
+        android:ems="10"
+        android:fontFamily="@font/cuprum"
+        android:inputType="textPersonName"
+        android:text="John Doe"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/TextNumDogs"
+        app:layout_constraintEnd_toStartOf="@+id/nav_host_fragment"
+        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintStart_toEndOf="@+id/nav_host_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePicture" />
+
+    <ImageView
+        android:id="@+id/ProfilePicture"
+        android:layout_width="334dp"
+        android:layout_height="342dp"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="149dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/TextNumDogs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="18dp"
+        android:capitalize="words"
+        android:ems="10"
+        android:fontFamily="@font/cuprum"
+        android:inputType="textPersonName"
+        android:text="Dogs: 2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toStartOf="@+id/FavoriteButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/nav_host_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/TextName" />
+
+    <SearchView
+        android:id="@+id/SearchBar"
+        android:layout_width="328dp"
+        android:layout_height="42dp"
+        android:background="#EDEBEB"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <Button
+        android:id="@+id/AdvancedSearch"
+        android:layout_width="38dp"
+        android:layout_height="26dp"
+        android:background="#FB7373"
+        android:text=". . ."
+        tools:layout_editor_absoluteX="357dp"
+        tools:layout_editor_absoluteY="41dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+<android.support.v7.widget.Toolbar
+android:id="@+id/toolbar"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:elevation="10dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_500"
+    android:orientation="vertical"
+    android:gravity="center|right">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center|right">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="8"
+            android:layout_margin="5dp"
+            android:text="snap deal"
+            android:gravity="center" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="2"
+            android:layout_margin="5dp"
+            android:ems="10"
+            android:text="Img"
+            android:gravity="center" >
+        </TextView>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="center|right">
+
+        <EditText
+            android:id="@+id/editMobileNo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/login_edittext"
+            android:ems="10"
+            android:hint="Find your dil ki deal"
+            android:drawableLeft="@drawable/search"
+            android:gravity="center" >
+        </EditText>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</android.support.v7.widget.Toolbar>
