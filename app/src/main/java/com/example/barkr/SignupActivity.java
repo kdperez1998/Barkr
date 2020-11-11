@@ -8,22 +8,21 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
     //private FirebaseAuth mAuth;
-    TextView signUp;
-    EditText username, password;
+    EditText username, password, reenterPassword, email;
+    TextView signIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_signup);
 
+        signIn = findViewById(R.id.signinText);
+        signIn.setOnClickListener(this);
         //mAuth = FirebaseAuth.getInstance();
-
-        signUp = findViewById(R.id.signupText);
-        signUp.setOnClickListener(this);
     }
 
     @Override
@@ -35,18 +34,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void login()
+    private void signUp()
     {
-        //Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        //startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
 
     @Override
     public void onClick(View v)
     {
-        if(v == signUp)
+        if(v == signIn)
         {
-            startActivity(new Intent(MainActivity.this, SignupActivity.class));
+            startActivity(new Intent(SignupActivity.this, MainActivity.class));
         }
     }
 }

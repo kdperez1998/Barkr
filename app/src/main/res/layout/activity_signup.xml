@@ -5,18 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/reenterPasswordInput"
+        android:layout_width="193dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="10dp"
+        android:hint="Re-Enter Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="193dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="10dp"
+        android:hint="Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
+
     <TextView
         android:id="@+id/pageTitle"
-        android:layout_width="69dp"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="42dp"
         android:clickable="false"
-        android:text="Log In"
+        android:text="Sign Up"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
+        app:layout_constraintVertical_bias="0.66" />
 
     <TextView
         android:id="@+id/appTitle"
@@ -35,7 +58,7 @@
         android:layout_marginTop="100dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_background"
@@ -53,47 +76,36 @@
         app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
     <EditText
-        android:id="@+id/passwordInput"
+        android:id="@+id/emailInput"
         android:layout_width="193dp"
         android:layout_height="66dp"
         android:layout_marginTop="10dp"
-        android:hint="Password"
+        android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
 
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/signupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Sign In"
+        android:layout_marginTop="20dp"
+        android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgotUsernamePasswordText" />
+        app:layout_constraintTop_toBottomOf="@+id/reenterPasswordInput" />
 
     <TextView
-        android:id="@+id/forgotUsernamePasswordText"
+        android:id="@+id/signinText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Forgot username or password?"
+        android:text="Already have an account? Sign In"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
-
-    <TextView
-        android:id="@+id/signupText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Don't have an account? Sign Up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInButton" />
+        app:layout_constraintTop_toBottomOf="@+id/signupButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
