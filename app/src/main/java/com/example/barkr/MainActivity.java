@@ -9,8 +9,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import android.widget.Button;
+import android.view.View;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
+
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,18 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        //test 9 for Enmanuel 2
+
+        button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v == button) {
+                    startActivity(new Intent(MainActivity.this, EditProfile.class));
+                }
+            }
+        });
+
     }
+
 
 }
