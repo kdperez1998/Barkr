@@ -10,8 +10,8 @@ import android.widget.ImageView;
 
 
 public class EditProfile extends AppCompatActivity {
-    EditText TextPostalAddress,editTextDate,TextPersonName,EditCity, EditEmail;
-    ImageView profileImage;
+    EditText TextPostalAddress,editTextDate,TextPersonName,EditCity, EditEmail,editTextTextPersonName2,editTextTextPersonName1;
+    ImageView profileImage,imageView3;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
