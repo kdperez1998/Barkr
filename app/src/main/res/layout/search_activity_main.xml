@@ -7,112 +7,33 @@
     android:layout_height="match_parent"
     android:paddingTop="?attr/actionBarSize">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" >
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    <fragment
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:navGraph="@navigation/mobile_navigation" />
-
-    <ImageButton
-        android:id="@+id/FavoriteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.878"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
-
-    <TextView
-        android:id="@+id/TextName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginLeft="53dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:capitalize="words"
-        android:ems="10"
-        android:fontFamily="@font/cuprum"
-        android:inputType="textPersonName"
-        android:text="John Doe"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/TextNumDogs"
-        app:layout_constraintEnd_toStartOf="@+id/nav_host_fragment"
-        app:layout_constraintHorizontal_bias="0.577"
-        app:layout_constraintStart_toEndOf="@+id/nav_host_fragment"
-        app:layout_constraintTop_toBottomOf="@+id/ProfilePicture" />
-
-    <ImageView
-        android:id="@+id/ProfilePicture"
-        android:layout_width="334dp"
-        android:layout_height="342dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SearchBar"
-        app:layout_constraintVertical_bias="0.502"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/TextNumDogs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="18dp"
-        android:capitalize="words"
-        android:ems="10"
-        android:fontFamily="@font/cuprum"
-        android:inputType="textPersonName"
-        android:text="Dogs: 2"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toStartOf="@+id/FavoriteButton"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/nav_host_fragment"
-        app:layout_constraintTop_toBottomOf="@+id/TextName" />
-
     <SearchView
         android:id="@+id/SearchBar"
         android:layout_width="328dp"
         android:layout_height="42dp"
         android:background="#EDEBEB"
-        app:layout_constraintEnd_toStartOf="@+id/AdvancedSearch"
+        app:layout_constraintEnd_toStartOf="@+id/AdvancedSearchButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/AdvancedSearch"
+        android:id="@+id/AdvancedSearchButton"
         android:layout_width="38dp"
         android:layout_height="26dp"
         android:background="#FB7373"
         android:text=". . ."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/SearchBar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerView"
+        android:layout_width="408dp"
+        android:layout_height="638dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SearchBar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
 package com.example.barkr;
 
 public class HumanProfile {
-    String name, gender, location, phoneNumber, email, bio;
-    int age;
+    private String name, gender, location, phoneNumber, email, bio;
+    private int age;
 
     public static void main(String[] args) {
 
@@ -11,7 +11,6 @@ public class HumanProfile {
     public void setname(String name) {
         this.name = name;
     }
-
     public void setgender(String gender) {
         this.gender = gender;
     }
@@ -65,19 +64,7 @@ public class HumanProfile {
         age = setAge;
 
     }
-    public String[] getHumanProfile () {
 
-        String[] profiles = new String[6];
-
-        profiles[0] = name;
-        profiles[1] = gender;
-        profiles[2] = location;
-        profiles[3] = phoneNumber;
-        profiles[4] = email;
-        profiles[5] = bio;
-
-        return profiles;
-    }
 
     public int getHumanProfileAge () {
         return age;

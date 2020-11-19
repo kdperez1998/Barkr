@@ -1,7 +1,8 @@
 package com.example.barkr;
 
 public class User {
-    String userName, Password;
+    private String userName, Password;
+    private HumanProfile humanProfile;
 
     public static void main(String[] args) {
 
@@ -19,5 +20,10 @@ public class User {
     }
     public String getPassword() {
         return this.Password;
+    }
+
+    public HumanProfile getHumanProfile()
+    {
+        return humanProfile;
     }
 }

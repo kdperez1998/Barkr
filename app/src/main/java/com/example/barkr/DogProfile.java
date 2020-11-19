@@ -1,8 +1,8 @@
 package com.example.barkr;
 
 public class DogProfile {
-    String name, breed, gender, spayedNeutered, shotDate, bio;
-    int age;
+    private String name, breed, gender, spayedNeutered, shotDate, bio;
+    private int age;
 
     public static void main(String[] args) {
 
@@ -64,20 +64,6 @@ public class DogProfile {
     age = setAge;
 
     }
-
-    public String[] getDogProfile () {
-
-            String[] profiles = new String[6];
-
-            profiles[0] = name;
-            profiles[1] = breed;
-            profiles[2] = gender;
-            profiles[3] = spayedNeutered;
-            profiles[4] = shotDate;
-            profiles[5] = bio;
-
-            return profiles;
-        }
 
     public int getDogProfileAge () {
         return age;
