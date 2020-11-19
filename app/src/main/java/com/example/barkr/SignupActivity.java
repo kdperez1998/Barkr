@@ -44,7 +44,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     {
         if(v == signIn)
         {
-            startActivity(new Intent(SignupActivity.this, MainActivity.class));
+            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
         }
     }
 }

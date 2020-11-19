@@ -1,52 +1,30 @@
 package com.example.barkr;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    //private FirebaseAuth mAuth;
-    TextView signUp;
-    EditText username, password;
+public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //mAuth = FirebaseAuth.getInstance();
-
-        signUp = findViewById(R.id.signupText);
-        signUp.setOnClickListener(this);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
-    @Override
-    public void onStart()
-    {
-        super.onStart();
-        //check if user is signed in
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-
-    }
-
-    private void login()
-    {
-        //Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        //startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    public void onClick(View v)
-    {
-        if(v == signUp)
-        {
-            startActivity(new Intent(MainActivity.this, SignupActivity.class));
-        }
-    }
 }

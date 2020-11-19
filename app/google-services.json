@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "558283037730",
+    "firebase_url": "https://barkr-a8dec.firebaseio.com",
+    "project_id": "barkr-a8dec",
+    "storage_bucket": "barkr-a8dec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558283037730:android:31eed68c2f05071a497e7b",
+        "android_client_info": {
+          "package_name": "com.example.barkr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558283037730-5i6ncijfrultr64h7oj1fltgqgligfog.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barkr",
+            "certificate_hash": "09ebac2a4d2dcd857f6d79f9d4e9527aa8162fe5"
+          }
+        },
+        {
+          "client_id": "558283037730-vt9s8hi6jbq5j4hsfuko9jffo1ci4kr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKoG8oapcAqoJeBJB21r0VSu-so8bNVIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558283037730-vt9s8hi6jbq5j4hsfuko9jffo1ci4kr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -80,7 +80,7 @@
                 android:autofillHints="no"
                 android:ems="10"
                 android:inputType="date"
-                android:text="@string/DOB"
+                android:text="DOB"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
                 android:freezesText="false"
                 android:importantForAutofill="no"
                 android:inputType="text|textPostalAddress"
-                android:text="@string/State"
+                android:text="State"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -170,9 +170,9 @@
                 android:ems="10"
                 android:importantForAutofill="no"
                 android:inputType="textLongMessage|textPersonName"
-                android:text="@string/bio"
+                android:text="Bio"
                 android:visibility="visible"
-                tools:ignore="LabelFor"/>
+                tools:ignore="LabelFor" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -211,7 +211,7 @@
 
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
-                android:text="@string/pet_name"
+                android:text="pet name"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
