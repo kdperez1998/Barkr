@@ -4,9 +4,19 @@ public class HumanProfile {
     private String name, gender, location, phoneNumber, email, bio;
     private int age;
 
-    public static void main(String[] args) {
+
+    public HumanProfile(String setName, String setGender, String setLocation,
+                        String setPhoneNumber, String setEmail, String setBio, int setAge) {
+        name = setName;
+        gender = setGender;
+        location = setLocation;
+        phoneNumber = setPhoneNumber;
+        email = setEmail;
+        bio = setBio;
+        age = setAge;
 
     }
+
 
     public void setname(String name) {
         this.name = name;
@@ -52,18 +62,6 @@ public class HumanProfile {
         return this.age;
     }
 
-
-    public void setHumanProfile (String setName, String setGender, String setLocation,
-                               String setPhoneNumber, String setEmail, String setBio, int setAge) {
-        name = setName;
-        gender = setGender;
-        location = setLocation;
-        phoneNumber = setPhoneNumber;
-        email = setEmail;
-        bio = setBio;
-        age = setAge;
-
-    }
 
 
     public int getHumanProfileAge () {

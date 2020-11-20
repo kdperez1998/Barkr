@@ -10,9 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AdvancedSearch"></activity>
-        <activity android:name=".EditProfile" />
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".SearchActivityMain" />
         <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".SearchResultsActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".LoginActivity"

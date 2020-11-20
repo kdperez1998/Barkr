@@ -1,13 +1,21 @@
 package com.example.barkr;
 
 public class DogProfile {
-    private String name, breed, gender, spayedNeutered, shotDate, bio;
+    private String name, breed, gender, bio;
+    private boolean spayedNeutered, shotUpToDate;
     private int age;
 
-    public static void main(String[] args) {
+    public DogProfile (String setName, String setBreed, String setGender, boolean setSpayedNeutered,
+                       boolean setShotUpToDate, String setBio, int setAge) {
+        name = setName;
+        breed = setBreed;
+        gender = setGender;
+        spayedNeutered = setSpayedNeutered;
+        shotUpToDate = setShotUpToDate;
+        bio = setBio;
+        age = setAge;
 
     }
-
     public void setname(String name) {
         this.name = name;
     }
@@ -18,11 +26,11 @@ public class DogProfile {
     public void setgender(String gender) {
         this.gender = gender;
     }
-    public void setspayedNeutered(String spayedNeutered) {
+    public void setspayedNeutered(boolean spayedNeutered) {
         this.spayedNeutered = spayedNeutered;
     }
-    public void setshotDate(String shotDate) {
-        this.shotDate = shotDate;
+    public void setshotDate(boolean setShotUpToDate) {
+        this.shotUpToDate = setShotUpToDate;
     }
     public void setbio(String bio) {
         this.bio = bio;
@@ -40,29 +48,17 @@ public class DogProfile {
     public String getgender() {
         return this.gender;
     }
-    public String getspayedNeutered() {
+    public boolean getspayedNeutered() {
         return this.spayedNeutered;
     }
-    public String getshotDate() {
-        return this.shotDate;
+    public boolean getShotUpToDate() {
+        return this.shotUpToDate;
     }
     public String getbio() {
         return this.bio;
     }
     public int getage() {
         return this.age;
-    }
-
-    public void setDogProfile (String setName, String setBreed, String setGender, String setSpayedNeutered,
-                               String setShotDate, String setBio, int setAge) {
-    name = setName;
-    breed = setBreed;
-    gender = setGender;
-    spayedNeutered = setSpayedNeutered;
-    shotDate = setShotDate;
-    bio = setBio;
-    age = setAge;
-
     }
 
     public int getDogProfileAge () {

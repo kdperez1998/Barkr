@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
     EditText TextPostalAddress,editTextDate,TextPersonName,EditCity, EditEmail,editTextTextPersonName2,editTextTextPersonName1;
     ImageView profileImage,imageView3;
     public void onCreate(Bundle savedInstanceState) {
