@@ -33,6 +33,7 @@ public class User {
 
     public void setDogProfiles()
     {
+        dogProfiles = new ArrayList<DogProfile>();
         dogProfiles.add(new DogProfile("Bagel", "Corgi", "m", false, true, "hello", 6));
     }
     public HumanProfile getHumanProfile()

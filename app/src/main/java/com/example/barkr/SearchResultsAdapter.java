@@ -1,6 +1,7 @@
 package com.example.barkr;
 
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,14 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     Context c;
 
     //data passed into constructor
-    SearchResultsAdapter(Context context, ArrayList<User> data)
+    public SearchResultsAdapter(Context context, ArrayList<User> data)
     {
         this.mInflater = LayoutInflater.from(context);
-        this.resultsList = data;
+        this.resultsList = new ArrayList<User>();
+        for(int i =  0; i < data.size(); i++)
+        {
+            this.resultsList.add(data.get(i));
+        }
         c = context;
     }
 
@@ -37,7 +42,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     public void onBindViewHolder(ViewHolder holder, int position) {
         User u = resultsList.get(position);
         String name = u.getHumanProfile().getname();
-        String dogAmount = u.getDogProfiles().size() + " Dogs";
+        //String name = u.getUsername();
+        String dogAmount = u.getDogProfiles().size() + " Dog";
+        if(u.getDogProfiles().size() >= 2 || u.getDogProfiles().size() < 1)
+        {
+            dogAmount += "s";
+        }
         holder.profileName.setText(name);
         holder.amountDogs.setText(dogAmount);
     }
