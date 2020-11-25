@@ -31,20 +31,15 @@ public class User {
         humanProfile = new HumanProfile(hp.getname(), hp.getgender(), hp.getlocation(), hp.getphoneNumber(), hp.getemail(), hp.getbio(), hp.getage());
     }
 
-    public void setDogProfiles()
+    public void setDogProfiles(ArrayList<DogProfile> dp)
     {
         dogProfiles = new ArrayList<DogProfile>();
-        dogProfiles.add(new DogProfile("Bagel", "Corgi", "m", false, true, "hello", 6));
+        //dogProfiles.add(new DogProfile("Bagel", "Corgi", "m", false, true, "hello", 6));
 
-        for(int i = 0; i < dogProfiles.size(); i++)
+        for(int i = 0; i < dp.size(); i++)
         {
-            dogProfiles.get(i).getname();
-            dogProfiles.get(i).getbreed();
-            dogProfiles.get(i).getgender();
-            dogProfiles.get(i).getspayedNeutered();
-            dogProfiles.get(i).getShotUpToDate();
-            dogProfiles.get(i).getbio();
-            dogProfiles.get(i).getage();
+            DogProfile newDogProfile = new DogProfile(dp.get(i).getname(), dp.get(i).getbreed(), dp.get(i).getgender(), dp.get(i).getspayedNeutered(), dp.get(i).getShotUpToDate(), dp.get(i).getbio(), dp.get(i).getage());
+            dogProfiles.add(newDogProfile);
         }
 
     }
