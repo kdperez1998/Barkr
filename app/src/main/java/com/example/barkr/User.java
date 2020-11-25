@@ -45,7 +45,6 @@ public class User {
             dogProfiles.get(i).getShotUpToDate();
             dogProfiles.get(i).getbio();
             dogProfiles.get(i).getage();
-
         }
 
     }
