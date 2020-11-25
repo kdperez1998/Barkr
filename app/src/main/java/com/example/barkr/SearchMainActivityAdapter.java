@@ -28,14 +28,16 @@ public class SearchMainActivityAdapter extends RecyclerView.Adapter<SearchMainAc
 
     //inflates the row layout from xml when needed
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View view = mInflater.inflate(R.layout.main_search_row, parent, false);
         return new ViewHolder(view);
     }
 
     //binds data to the text view in each row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position)
+    {
         User u = userList.get(position);
         String name = u.getHumanProfile().getname();
         String dogAmount = u.getDogProfiles().size() + " Dogs";
@@ -50,13 +52,15 @@ public class SearchMainActivityAdapter extends RecyclerView.Adapter<SearchMainAc
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         public TextView profileName, amountDogs;
         public ImageButton favoriteButton;
         public ImageView profilePicture;
 
         //constructor
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView)
+        {
             super(itemView);
 
             profileName = (TextView) itemView.findViewById(R.id.ProfileName);

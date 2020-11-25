@@ -396,6 +396,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxShotsUptodate" />
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="98dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="199dp"
+            android:layout_marginLeft="199dp"
+            android:layout_marginTop="92dp"
+            android:layout_marginEnd="114dp"
+            android:layout_marginRight="114dp"
+            android:layout_marginBottom="60dp"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPetBio"
+            app:layout_constraintVertical_bias="0.574" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

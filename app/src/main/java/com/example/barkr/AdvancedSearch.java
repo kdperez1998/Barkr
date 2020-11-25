@@ -1,13 +1,15 @@
 package com.example.barkr;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class AdvancedSearch extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AdvancedSearch extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_search);
     }
