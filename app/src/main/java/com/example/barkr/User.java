@@ -6,24 +6,44 @@ public class User {
     private String userName, Password;
     private HumanProfile humanProfile;
     private ArrayList<DogProfile> dogProfiles;
+    private String email;
 
-    public User(String u)
+    public User(String u, String email, HumanProfile hp, ArrayList<DogProfile> dp)
     {
-        this.userName = u;
+        this.setuserName(u);
+        this.setHumanProfile(hp);
+        this.setDogProfiles(dp);
+        this.setEmail(email);
     }
 
-    public void setuserName(String userName) {
+    public void setuserName(String userName)
+    {
         this.userName = userName;
     }
 
-    public void setPassword(String Password) {
+    public void setEmail(String e)
+    {
+        this.email = e;
+    }
+
+    public void setPassword(String Password)
+    {
         this.Password = Password;
     }
-    public String getUsername() {
+
+    public String getUsername()
+    {
         return this.userName;
     }
-    public String getPassword() {
+
+    public String getPassword()
+    {
         return this.Password;
+    }
+
+    public String getEmail()
+    {
+        return this.email;
     }
 
     public void setHumanProfile(HumanProfile hp)
@@ -43,10 +63,14 @@ public class User {
         }
 
     }
+
     public HumanProfile getHumanProfile()
     {
         return humanProfile;
     }
 
-    public ArrayList<DogProfile> getDogProfiles() {return dogProfiles; }
+    public ArrayList<DogProfile> getDogProfiles()
+    {
+        return dogProfiles;
+    }
 }

@@ -1,228 +1,404 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/State"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:addStatesFromChildren="true"
-    android:clickable="true"
-    android:focusable="true"
-    android:verticalScrollbarPosition="defaultPosition"
-    android:visibility="visible"
-    tools:context=".EditProfileActivity">
-    <ScrollView
+    android:layout_width="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="60dp"
+        android:verticalScrollbarPosition="defaultPosition"
+        android:visibility="visible"
+        tools:context=".editprofile">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/EditOwnerName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:overScrollMode="ifContentScrolls">
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:baselineAligned="false"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            tools:ignore="LabelFor" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="141dp"
-                android:layout_marginLeft="141dp"
-                android:layout_marginTop="126dp"
-                android:layout_marginEnd="142dp"
-                android:layout_marginRight="142dp"
-                android:layout_marginBottom="569dp"
-                android:clickable="true"
-                android:contentDescription="@string/todo"
-                android:focusable="true"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_launcher_background"
-                tools:src="@tools:sample/avatars" />
+        <EditText
+            android:id="@+id/EditDateofBirth"
+            android:layout_width="wrap_content"
+            tools:ignore="LabelFor"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:contentDescription="@string/date_of_birth_for_owner"
+            android:autofillHints="no"
+            android:ems="10"
+            android:inputType="date"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditOwnerName"
+            tools:text="@tools:sample/date/mmddyy" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginLeft="61dp"
-                android:layout_marginTop="-450dp"
-                android:layout_marginEnd="141dp"
-                android:layout_marginRight="141dp"
-                android:layout_marginBottom="417dp"
-                android:ems="10"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:text="@string/Owner_name"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="LabelFor" />
+        <EditText
+            android:id="@+id/editBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textLongMessage|textPersonName"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/textBio"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPhone"
+            tools:ignore="LabelFor" />
 
-            <EditText
-                android:id="@+id/editTextDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginLeft="55dp"
-                android:layout_marginTop="-415dp"
-                android:layout_marginEnd="143dp"
-                android:layout_marginRight="143dp"
-                android:layout_marginBottom="352dp"
-                android:autofillHints="no"
-                android:ems="10"
-                android:inputType="date"
-                android:text="DOB"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="LabelFor"
-                tools:text="@tools:sample/date/mmddyy" />
+        <ImageView
 
-            <EditText
-                android:id="@+id/editTextTextPostalAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginLeft="55dp"
-                android:layout_marginTop="-365dp"
-                android:layout_marginEnd="143dp"
-                android:layout_marginRight="143dp"
-                android:layout_marginBottom="281dp"
-                android:ems="10"
-                android:freezesText="false"
-                android:importantForAutofill="no"
-                android:inputType="text|textPostalAddress"
-                android:text="State"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDate"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="LabelFor"
-                tools:text="State" />
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.61"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_background"
+            tools:src="@tools:sample/avatars" />
 
-            <EditText
-                android:id="@+id/EditCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginLeft="55dp"
-                android:layout_marginTop="-300dp"
-                android:layout_marginEnd="147dp"
-                android:layout_marginRight="143dp"
-                android:layout_marginBottom="222dp"
-                android:ems="10"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:text="@string/City"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPostalAddress"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="LabelFor" />
+        <TextView
+            android:id="@+id/TextEmaillabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:text="@string/email"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/EditEmail"
+            app:layout_constraintTop_toBottomOf="@+id/TextBirthdate" />
 
-            <EditText
-                android:id="@+id/EditEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginLeft="57dp"
-                android:layout_marginTop="-229dp"
-                android:layout_marginEnd="42dp"
-                android:layout_marginRight="42dp"
-                android:layout_marginBottom="153dp"
-                android:ems="15"
-                android:importantForAutofill="no"
-                android:inputType="textLongMessage|text|textEmailAddress"
-                android:text="@string/email"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EditCity"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="LabelFor" />
+        <TextView
+            android:id="@+id/text_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/state"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/Spinner_State"
+            app:layout_constraintHorizontal_bias="0.116"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextEmaillabel" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-165dp"
-                android:ems="10"
-                android:importantForAutofill="no"
-                android:inputType="textLongMessage|textPersonName"
-                android:text="Bio"
-                android:visibility="visible"
-                tools:ignore="LabelFor" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="108dp"
+            android:layout_marginLeft="108dp"
+            android:layout_marginTop="44dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editBio"
+            app:srcCompat="@drawable/ic_launcher_background"
+            tools:src="@tools:sample/avatars"
+            android:layout_width="wrap_content" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="141dp"
-                android:layout_marginLeft="141dp"
-                android:layout_marginTop="-8dp"
-                android:layout_marginEnd="142dp"
-                android:layout_marginRight="142dp"
-                android:layout_marginBottom="569dp"
-                android:clickable="true"
-                android:contentDescription="@string/todo"
-                android:focusable="true"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_launcher_background"
-                tools:src="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/TextOwner"
+            android:layout_width="45dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="56dp"
+            android:text="@string/Owner_name"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/TextBirthdate"
+            app:layout_constraintEnd_toStartOf="@+id/EditOwnerName" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginLeft="61dp"
-                android:layout_marginTop="-450dp"
-                android:layout_marginEnd="141dp"
-                android:layout_marginRight="141dp"
-                android:layout_marginBottom="417dp"
-                android:ems="10"
+        <EditText
+            android:id="@+id/EditEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="26dp"
+            android:ems="15"
+            android:importantForAutofill="no"
+            android:inputType="textLongMessage|text|textEmailAddress"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/text_state"
+            app:layout_constraintStart_toEndOf="@+id/TextEmaillabel"
+            app:layout_constraintTop_toBottomOf="@+id/EditDateofBirth"
+            tools:ignore="LabelFor" />
 
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:text="pet name"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="LabelFor" />
+        <TextView
+            android:id="@+id/TextBirthdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/birthdate"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/EditDateofBirth"
+            app:layout_constraintTop_toBottomOf="@+id/EditOwnerName" />
+
+        <TextView
+            android:id="@+id/textCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="56dp"
+            android:layout_marginRight="56dp"
+            android:text="@string/City"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/spinner_City"
+            app:layout_constraintTop_toBottomOf="@+id/text_state" />
+
+        <TextView
+            android:id="@+id/textBio"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/Bio"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/editBio"
+            app:layout_constraintTop_toBottomOf="@+id/textPhone" />
+
+        <Spinner
+            android:id="@+id/Spinner_State"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="132dp"
+            android:layout_marginRight="132dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditEmail" />
+
+        <TextView
+            android:id="@+id/textPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:text="@string/phone_number"
+            android:visibility="visible"
+            tools:ignore="LabelFor"
+            app:layout_constraintEnd_toStartOf="@+id/editTextPhone"
+            app:layout_constraintTop_toBottomOf="@+id/textCity" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            tools:ignore="LabelFor"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/textPhone"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_City" />
+
+        <Spinner
+            android:id="@+id/spinner_City"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginLeft="76dp"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/textCity"
+            app:layout_constraintTop_toBottomOf="@+id/Spinner_State" />
+
+        <TextView
+            android:id="@+id/TextPet"
+            android:layout_width="45dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:text="@string/pet_name"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/editTextPetName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
-        </LinearLayout>
-    </ScrollView>
+        <EditText
+            android:id="@+id/editTextPetName"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:text="@string/edit_pets_name"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/TextPetDOB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/pets_birthdate"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextPet" />
+
+        <Spinner
+            android:id="@+id/PetsBirth_Month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/PetsBirth_Day"
+            app:layout_constraintStart_toEndOf="@+id/TextPetDOB"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPetName" />
+
+        <Spinner
+            android:id="@+id/PetsBirth_Day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/TextPetDOB"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPetName" />
+
+        <Spinner
+            android:id="@+id/PetsBirthdayYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/PetsBirth_Day"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPetName" />
+
+        <TextView
+            android:id="@+id/TextViewGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
+            android:text="@string/doggender"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerGender"
+            app:layout_constraintTop_toBottomOf="@+id/TextPetDOB" />
+
+        <Spinner
+            android:id="@+id/spinnerGender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="13dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/TextViewGender"
+            app:layout_constraintTop_toBottomOf="@+id/PetsBirth_Month" />
+
+        <CheckBox
+            android:id="@+id/checkBoxSpayed_Neutered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/spayed_neutered"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerGender" />
+
+        <CheckBox
+            android:id="@+id/checkBoxShotsUptodate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/shots_up_to_date"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxSpayed_Neutered" />
+
+        <TextView
+            android:id="@+id/textBreed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/breed"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxShotsUptodate" />
+
+        <TextView
+            android:id="@+id/textPetBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/Petsbio"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textBreed" />
+
+        <EditText
+            android:id="@+id/editTextPetBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine|textPersonName"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textBreed" />
+
+        <Spinner
+            android:id="@+id/spinnerBreed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="150dp"
+            android:layout_marginRight="150dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxShotsUptodate" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+

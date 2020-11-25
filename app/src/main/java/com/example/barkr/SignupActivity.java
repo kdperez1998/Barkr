@@ -17,12 +17,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     private FirebaseAuth mAuth;
     EditText username, password, reenterPassword, email;
@@ -104,14 +102,18 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                     Toast.makeText(SignupActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                 }
-                                if (task.isSuccessful()) {
+                                if (task.isSuccessful())
+                                {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("SignUpEmailPassword", "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    startActivity(new Intent(SignupActivity.this, CreateProfileActivity.class));
                                 }
                             }
                         });
-            } else
+            }
+
+            else
             {
                 reenterPassword.setError("Passwords do not match");
             }

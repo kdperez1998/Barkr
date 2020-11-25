@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d("EmailPassword", "signInWithEmail:success");
                     Toast.makeText(LoginActivity.this, "Authentication success.",
                             Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, EditProfileActivity.class));
                 }
                 else
                 {

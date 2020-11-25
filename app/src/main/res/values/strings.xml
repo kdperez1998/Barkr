@@ -34,4 +34,23 @@
     <string name="female">Female</string>
     <string name="please_input_any_specific_attributes_to_search_by_below_every_value_left_blank_will_be_ignored">Please input any specific attributes to search by below. Every value left blank will be ignored.</string>
     <string name="back">Back</string>
+    <string name="birthdate">birthdate</string>
+    <string name="state">State</string>
+    <string name="Bio">Bio</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="pets_birthdate">Pet\'s BirthDate</string>
+    <string name="Petsbio">Bio</string>
+    <string name="breed">Breed</string>
+    <string name="pet_name">Pet name</string>
+    <string name="edit_pets_name" />
+    <string name="data_of_birth_for_owner">Data of Birth for Owner</string>
+    <string name="humans_dob" />
+    <string name="date_of_birth_for_owner" />
+    <string name="title_activity_createprofile">createprofile</string>
+    <string name="title_activity_create_profile">CreateProfile</string>
+    <string name="Headercreate_profile">HeaderCreateProfile</string>
+    <string name="TextHumanName" />
+    <string name="FinishProfile">Finish Profile</string>
+    <string name="save">save</string>
+    <string name="imageofHuman">ImageofHuman</string>
 </resources>

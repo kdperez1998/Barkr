@@ -22,11 +22,11 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_search_results);
 
         userList = new ArrayList<User>();
-        User u = new User("livelikedragons");
-        u.setDogProfiles();
+        //User u = new User("livelikedragons");
+        //u.setDogProfiles();
         HumanProfile hp = new HumanProfile("Human", "f", "Texas", "", "kdperez", "hello", 12);
-        u.setHumanProfile(hp);
-        userList.add(u);
+        //u.setHumanProfile(hp);
+        //userList.add(u);
 
 
         resultsRecycler = (RecyclerView) findViewById(R.id.RecyclerViewSearchResults);

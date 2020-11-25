@@ -6,7 +6,8 @@ public class DogProfile {
     private int age;
 
     public DogProfile (String setName, String setBreed, String setGender, boolean setSpayedNeutered,
-                       boolean setShotUpToDate, String setBio, int setAge) {
+                       boolean setShotUpToDate, String setBio, int setAge)
+    {
         name = setName;
         breed = setBreed;
         gender = setGender;
@@ -16,52 +17,75 @@ public class DogProfile {
         age = setAge;
 
     }
-    public void setname(String name) {
+
+    public void setname(String name)
+    {
         this.name = name;
     }
 
-    public void setbreed(String breed) {
+    public void setbreed(String breed)
+    {
         this.breed = breed;
     }
-    public void setgender(String gender) {
+
+    public void setgender(String gender)
+    {
         this.gender = gender;
     }
-    public void setspayedNeutered(boolean spayedNeutered) {
+
+    public void setspayedNeutered(boolean spayedNeutered)
+    {
         this.spayedNeutered = spayedNeutered;
     }
-    public void setshotDate(boolean setShotUpToDate) {
+
+    public void setshotDate(boolean setShotUpToDate)
+    {
         this.shotUpToDate = setShotUpToDate;
     }
-    public void setbio(String bio) {
+
+    public void setbio(String bio)
+    {
         this.bio = bio;
     }
-    public void setage(int age) {
+
+    public void setage(int age)
+    {
         this.age = age;
     }
-    public String getname() {
+
+    public String getname()
+    {
         return this.name;
     }
 
-    public String getbreed() {
+    public String getbreed()
+    {
         return this.breed;
     }
-    public String getgender() {
+
+    public String getgender()
+    {
         return this.gender;
     }
-    public boolean getspayedNeutered() {
+
+    public boolean getspayedNeutered()
+    {
         return this.spayedNeutered;
     }
-    public boolean getShotUpToDate() {
+
+    public boolean getShotUpToDate()
+    {
         return this.shotUpToDate;
     }
-    public String getbio() {
+
+    public String getbio()
+    {
         return this.bio;
     }
-    public int getage() {
+
+    public int getage()
+    {
         return this.age;
     }
 
-    public int getDogProfileAge () {
-        return age;
-    }
 }
