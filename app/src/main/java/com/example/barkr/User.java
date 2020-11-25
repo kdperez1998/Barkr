@@ -35,6 +35,19 @@ public class User {
     {
         dogProfiles = new ArrayList<DogProfile>();
         dogProfiles.add(new DogProfile("Bagel", "Corgi", "m", false, true, "hello", 6));
+
+        for(int i = 0; i < dogProfiles.size(); i++)
+        {
+            dogProfiles.get(i).getname();
+            dogProfiles.get(i).getbreed();
+            dogProfiles.get(i).getgender();
+            dogProfiles.get(i).getspayedNeutered();
+            dogProfiles.get(i).getShotUpToDate();
+            dogProfiles.get(i).getbio();
+            dogProfiles.get(i).getage();
+
+        }
+
     }
     public HumanProfile getHumanProfile()
     {

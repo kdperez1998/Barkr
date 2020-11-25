@@ -1,6 +1,5 @@
 package com.example.barkr;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,6 +27,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         HumanProfile hp = new HumanProfile("Human", "f", "Texas", "", "kdperez", "hello", 12);
         u.setHumanProfile(hp);
         userList.add(u);
+
 
         resultsRecycler = (RecyclerView) findViewById(R.id.RecyclerViewSearchResults);
         adapter = new SearchResultsAdapter(SearchResultsActivity.this, userList);
