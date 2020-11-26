@@ -53,4 +53,9 @@
     <string name="FinishProfile">Finish Profile</string>
     <string name="save">save</string>
     <string name="imageofHuman">ImageofHuman</string>
+    <string name="SignInTitle"><u>Sign in</u></string>
+    <string name="SignUpTitle"><u>Sign up</u></string>
+    <string name="ForgotPassword"><u>Forgot Password?</u></string>
+    <string name="DontHaveAnAccount">Don\'t have an account? <u>Sign up</u></string>
+    <string name="AlreadyHaveAnAccount">Already have an account? <u>Sign in</u></string>
 </resources>

@@ -5,6 +5,10 @@ public class DogProfile {
     private boolean spayedNeutered, shotUpToDate;
     private int age;
 
+    public DogProfile()
+    {
+
+    }
     public DogProfile (String setName, String setBreed, String setGender, boolean setSpayedNeutered,
                        boolean setShotUpToDate, String setBio, int setAge)
     {

@@ -4,42 +4,25 @@ import java.util.ArrayList;
 
 public class User
 {
-    private String userName, Password;
     private HumanProfile humanProfile;
     private ArrayList<DogProfile> dogProfiles;
     private String email;
 
-    public User(String u, String email, HumanProfile hp, ArrayList<DogProfile> dp)
+    public User(String email, HumanProfile hp, ArrayList<DogProfile> dp)
     {
-        this.setuserName(u);
         this.setHumanProfile(hp);
         this.setDogProfiles(dp);
         this.setEmail(email);
     }
 
-    public void setuserName(String userName)
+    public User()
     {
-        this.userName = userName;
+
     }
 
     public void setEmail(String e)
     {
         this.email = e;
-    }
-
-    public void setPassword(String Password)
-    {
-        this.Password = Password;
-    }
-
-    public String getUsername()
-    {
-        return this.userName;
-    }
-
-    public String getPassword()
-    {
-        return this.Password;
     }
 
     public String getEmail()

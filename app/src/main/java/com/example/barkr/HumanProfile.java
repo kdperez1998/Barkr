@@ -5,6 +5,11 @@ public class HumanProfile {
     private int age;
 
 
+    public HumanProfile()
+    {
+
+    }
+
     public HumanProfile(String setName, String setGender, String setLocation,
                         String setPhoneNumber, String setEmail, String setBio, int setAge)
     {
@@ -48,7 +53,7 @@ public class HumanProfile {
         this.bio = bio;
     }
 
-    public void setbreed(int age)
+    public void setAge(int age)
     {
         this.age = age;
     }

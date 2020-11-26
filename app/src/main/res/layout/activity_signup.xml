@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#2B2B2B">
 
     <EditText
         android:id="@+id/reenterPasswordInput"
@@ -15,7 +16,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:shadowColor="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="@color/DarkGrayAccent"
+        android:textCursorDrawable="@color/LightGrayAccent"
+        android:backgroundTint="@color/LightGrayAccent"
+        android:fontFamily="@font/roboto"/>
 
     <EditText
         android:id="@+id/passwordInput"
@@ -27,15 +36,26 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailInput"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:shadowColor="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="@color/DarkGrayAccent"
+        android:textCursorDrawable="@color/LightGrayAccent"
+        android:backgroundTint="@color/LightGrayAccent"
+        android:fontFamily="@font/roboto"/>
 
     <TextView
         android:id="@+id/pageTitle"
-        android:layout_width="80dp"
-        android:layout_height="42dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:clickable="false"
-        android:text="Sign Up"
+        android:fontFamily="@font/roboto"
+        android:text="@string/SignUpTitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -47,55 +67,57 @@
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/chewy"
         android:text="Barkr"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        android:textColor="#FFFFFF"/>
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="100dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <EditText
-        android:id="@+id/usernameInput"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:hint="Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appTitle"
-        android:inputType="text"/>
+        android:src="@mipmap/ic_launcher_red" />
 
     <EditText
         android:id="@+id/emailInput"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="60dp"
         android:hint="Email"
+        android:inputType="text"
+        android:shadowColor="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="@color/DarkGrayAccent"
+        android:textCursorDrawable="@color/LightGrayAccent"
+        android:backgroundTint="@color/LightGrayAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameInput"
-        android:inputType="text" />
+        app:layout_constraintTop_toBottomOf="@+id/appTitle"
+        android:fontFamily="@font/roboto"/>
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
         android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:fontFamily="@font/roboto_medium"
         android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textColor="@color/barkrRed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,10 +128,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Already have an account? Sign In"
+        android:text="@string/AlreadyHaveAnAccount"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupButton" />
+        app:layout_constraintTop_toBottomOf="@+id/signupButton"
+        android:fontFamily="@font/roboto_light"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

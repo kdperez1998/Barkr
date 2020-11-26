@@ -36,7 +36,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         signIn = findViewById(R.id.signinText);
         signIn.setOnClickListener(this);
 
-        username = findViewById(R.id.usernameInput);
+        //username = findViewById(R.id.usernameInput);
         password = findViewById(R.id.passwordInput);
         reenterPassword = findViewById(R.id.reenterPasswordInput);
         email = findViewById(R.id.emailInput);
