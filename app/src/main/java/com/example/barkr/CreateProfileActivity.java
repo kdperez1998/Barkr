@@ -85,12 +85,12 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
             String email = editHumanEmail.getText().toString();
             String bio = editHumanBio.getText().toString();
             //int age = editHumanDateOfBirth;
-            HumanProfile hp = new HumanProfile(name, gender, location, phone, email, bio, 0);
-            ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
-            DogProfile dp = new DogProfile("Bagel", "Corgi", "m", false, true, "Hello", 1);
-            dogProfiles.add(dp);
-            User newUser = new User(editHumanEmail.getText().toString(), hp, dogProfiles);
-            myRef.child("users").child(user.getUid()).setValue(newUser);
+            //HumanProfile hp = new HumanProfile(name, gender, location, phone, email, bio, 0);
+            //ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
+            //DogProfile dp = new DogProfile("Bagel", "Corgi", "m", false, true, "Hello", 1);
+            //dogProfiles.add(dp);
+           // User newUser = new User(editHumanEmail.getText().toString(), hp, dogProfiles);
+           // myRef.child("users").child(user.getUid()).setValue(newUser);
         }
     }
 

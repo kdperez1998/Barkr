@@ -32,7 +32,7 @@ public class User
 
     public void setHumanProfile(HumanProfile hp)
     {
-        humanProfile = new HumanProfile(hp.getname(), hp.getgender(), hp.getlocation(), hp.getphoneNumber(), hp.getemail(), hp.getbio(), hp.getage());
+        //humanProfile = new HumanProfile(hp.getname(), hp.getgender(), hp.getlocation(), hp.getphoneNumber(), hp.getemail(), hp.getbio(), hp.getage());
     }
 
     public void setDogProfiles(ArrayList<DogProfile> dp)
@@ -42,8 +42,8 @@ public class User
 
         for(int i = 0; i < dp.size(); i++)
         {
-            DogProfile newDogProfile = new DogProfile(dp.get(i).getname(), dp.get(i).getbreed(), dp.get(i).getgender(), dp.get(i).getspayedNeutered(), dp.get(i).getShotUpToDate(), dp.get(i).getbio(), dp.get(i).getage());
-            dogProfiles.add(newDogProfile);
+            //DogProfile newDogProfile = new DogProfile(dp.get(i).getname(), dp.get(i).getbreed(), dp.get(i).getgender(), dp.get(i).getspayedNeutered(), dp.get(i).getShotUpToDate(), dp.get(i).getbio(), dp.get(i).getage());
+            //dogProfiles.add(newDogProfile);
         }
 
     }

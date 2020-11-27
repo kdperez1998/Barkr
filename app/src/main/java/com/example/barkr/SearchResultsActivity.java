@@ -24,10 +24,11 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         userList = new ArrayList<User>();
         //User u = new User("livelikedragons");
         //u.setDogProfiles();
-        HumanProfile hp = new HumanProfile("Human", "f", "Texas", "", "kdperez", "hello", 12);
+        //HumanProfile hp = new HumanProfile("Human", "f", "Texas", "", "kdperez", "hello", 12);
         //u.setHumanProfile(hp);
         //userList.add(u);
 
+        userList = (ArrayList<User>) getIntent().getSerializableExtra("SORTED_RESULTS");
 
         resultsRecycler = (RecyclerView) findViewById(R.id.RecyclerViewSearchResults);
         adapter = new SearchResultsAdapter(SearchResultsActivity.this, userList);
@@ -38,6 +39,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
 
     }
 
+    //on click for buttons outside of recycler view
     @Override
     public void onClick(View v)
     {

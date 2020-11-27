@@ -1,17 +1,29 @@
 package com.example.barkr;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class HumanProfile {
-    private String name, gender, location, phoneNumber, email, bio;
-    private int age;
+    private String name, gender, location, phoneNumber, email, bio, DOB;
 
 
     public HumanProfile()
     {
-
+        name = null;
+        gender = null;
+        location = null;
+        phoneNumber = null;
+        email = null;
+        bio = null;
+        DOB = null;
     }
 
     public HumanProfile(String setName, String setGender, String setLocation,
-                        String setPhoneNumber, String setEmail, String setBio, int setAge)
+                        String setPhoneNumber, String setEmail, String setBio, String setDOB)
     {
         name = setName;
         gender = setGender;
@@ -19,7 +31,7 @@ public class HumanProfile {
         phoneNumber = setPhoneNumber;
         email = setEmail;
         bio = setBio;
-        age = setAge;
+        DOB = setDOB;
 
     }
 
@@ -53,9 +65,14 @@ public class HumanProfile {
         this.bio = bio;
     }
 
-    public void setAge(int age)
+    public void setDOB(int month, int day, int year)
     {
-        this.age = age;
+        this.DOB = Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year);
+    }
+
+    public void setDOB(String dob)
+    {
+        this.DOB = dob;
     }
 
     public String getname()
@@ -88,9 +105,56 @@ public class HumanProfile {
         return this.bio;
     }
 
+    public String getDOB()
+    {
+        return this.DOB;
+    }
+
+    public String getState()
+    {
+        String[] location = getlocation().split(", ");
+        return location[1];
+    }
+
+    public String getCity()
+    {
+        String[] location = getlocation().split(", ");
+        return location[0];
+    }
+
+    public int getDOBMonth()
+    {
+        String[] birthday = getDOB().split( "/");
+        int month = Integer.parseInt(birthday[0]);
+        return month;
+    }
+
+    public int getDOBDay()
+    {
+        String[] birthday = getDOB().split( "/");
+        int day = Integer.parseInt(birthday[1]);
+        return day;
+    }
+
+    public int getDOBYear()
+    {
+        String[] birthday = getDOB().split( "/");
+        int year = Integer.parseInt(birthday[2]);
+        return year;
+    }
+
     public int getage()
     {
-        return this.age;
+        //parse out DOB to month, day, and year values
+        String[] birthday = getDOB().split( "/");
+        int day = Integer.parseInt(birthday[1]);
+        int month = Integer.parseInt(birthday[0]);
+        int year = Integer.parseInt(birthday[2]);
+
+        LocalDate l = LocalDate.of(year, month, day);
+        LocalDate now = LocalDate.now();
+        Period diff = Period.between(l, now);
+        return diff.getYears();
     }
 
 }

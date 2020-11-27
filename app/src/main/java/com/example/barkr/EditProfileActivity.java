@@ -108,7 +108,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     int indexCities = 0;
                     for(int i = 0; i < cities.size(); i++)
                     {
-                        if(cities.get(i) == city)
+                        if(cities.get(i).equals(city))
                         {
                             indexCities = i;
                         }
@@ -118,7 +118,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     //states
                     for(int i = 0; i < states.size(); i++)
                     {
-                        if(states.get(i) == city)
+                        if(states.get(i).equals(city))
                         {
                             indexStates = i;
                         }
@@ -156,12 +156,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             String email = editPhoneNumber.getText().toString();
             String bio = editHumanBio.getText().toString();
             //int age = editHumanDateOfBirth;
-            HumanProfile hp = new HumanProfile(name, gender, location, phone, email, bio, 0);
-            ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
-            DogProfile dp = new DogProfile("Bagel", "Corgi", "m", false, true, "Hello", 1);
-            dogProfiles.add(dp);
-            User newUser = new User(editEmail.getText().toString(), hp, dogProfiles);
-            myRef.child("users").child(user.getUid()).setValue(newUser);
+            //HumanProfile hp = new HumanProfile(name, gender, location, phone, email, bio, 0);
+            //ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
+            //DogProfile dp = new DogProfile("Bagel", "Corgi", "m", false, true, "Hello", 1);
+            //dogProfiles.add(dp);
+            //User newUser = new User(editEmail.getText().toString(), hp, dogProfiles);
+            //myRef.child("users").child(user.getUid()).setValue(newUser);
         }
     }
 

@@ -1,9 +1,11 @@
 package com.example.barkr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ViewFlipper;
 
@@ -26,6 +28,7 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
     RecyclerView resultsRecycler;
     ArrayList<User> userList;
     static SearchResultsAdapter adapter;
+    Button advancedSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,10 +40,12 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        advancedSearch = getView().findViewById(R.id.AdvancedSearchButton);
+        advancedSearch.setOnClickListener(this);
         userList = new ArrayList<User>();
         //User u = new User("livelikedragons");
         //u.setDogProfiles();
-        HumanProfile hp = new HumanProfile("Human", "f", "Texas", "", "kdperez", "hello", 12);
+        //HumanProfile hp = new HumanProfile("Human", "f", "Texas", "", "kdperez", "hello", 12);
         //u.setHumanProfile(hp);
         //userList.add(u);
         //userList.add(u);
@@ -85,7 +90,10 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-
+        if(v == advancedSearch)
+        {
+            startActivity(new Intent(getActivity(), AdvancedSearchActivity.class));
+        }
     }
 
 }

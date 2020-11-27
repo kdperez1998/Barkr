@@ -46,7 +46,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         String name = u.getHumanProfile().getname();
 
         //String name = u.getUsername();
-        String dogAmount = u.getDogProfiles().size() + " Dog";
+        String dogAmount = u.getDogProfiles().size() + " " + u.getDogProfiles().get(0).getbreed();
 
         if(u.getDogProfiles().size() >= 2 || u.getDogProfiles().size() < 1)
         {
@@ -90,7 +90,10 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         @Override
         public void onClick(View v)
         {
-
+            if(v == itemView)
+            {
+                //load the viewProfileActivity
+            }
         }
 
     }
