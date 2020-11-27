@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AdvancedSearch extends AppCompatActivity
+public class AdvancedSearchActivity extends AppCompatActivity
 {
 
     @Override

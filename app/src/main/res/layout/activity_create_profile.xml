@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="60dp"
         android:verticalScrollbarPosition="defaultPosition"
-        android:visibility="visible"
-        tools:context=".createprofile">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/textHeaderofcreateprofile"

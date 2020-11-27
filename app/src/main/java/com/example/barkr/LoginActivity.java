@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null)
         {
-            //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }
 
     }
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                             else
                             {
-                                startActivity(new Intent(LoginActivity.this, EditProfileActivity.class));
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
                         }
 

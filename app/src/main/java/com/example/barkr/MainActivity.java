@@ -1,8 +1,13 @@
 package com.example.barkr;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -10,29 +15,46 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public  class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
+    BottomNavigationView navView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        //load default fragment
+        loadFragment(new SearchActivityMain());
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        NavigationUI.setupWithNavController(navView, navController);
+        //get bottom nav view and attach to listener
+        navView = findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(this);
     }
 
+    private boolean loadFragment(Fragment frag) {
+        //switches fragment
+        if(frag != null)
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, frag).commit();
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+
+        switch(item.getItemId()) {
+            case R.id.navigation_search:
+                fragment = new SearchActivityMain();
+                break;
+            case R.id.navigation_profile:
+                fragment = new ViewProfileActivity();
+                break;
+        }
+        return loadFragment(fragment);
+    }
 }
