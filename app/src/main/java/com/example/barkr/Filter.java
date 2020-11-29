@@ -6,6 +6,7 @@ public class Filter {
     String dogAge, dogAgeDesc, breed, humanAge;
     boolean spayedNeutered, shotsUpToDate;
     ArrayList<String> dogGender, humanGender;
+    int miles;
 
     public Filter()
     {
@@ -17,10 +18,11 @@ public class Filter {
         humanGender = new ArrayList<String>();
         spayedNeutered = false;
         shotsUpToDate = false;
+        miles = 50;
     }
 
     public Filter(String setDogAge, String setDogAgeDescription, ArrayList<String> setDogGender, boolean setSpayedNeautered, boolean setShotsUpToDate,
-                  String setBreed, String setHumanAge, ArrayList<String> setHumanGender)
+                  String setBreed, String setHumanAge, ArrayList<String> setHumanGender, int setMiles)
     {
         dogAge = setDogAge;
         dogAgeDesc = setDogAgeDescription;
@@ -38,6 +40,7 @@ public class Filter {
         {
             humanGender.add(setHumanGender.get(i));
         }
+        miles = setMiles;
     }
 
     public void setDogAge(String val)
@@ -80,6 +83,10 @@ public class Filter {
             humanGender.add(val.get(i));
         }
     }
+    public void setMiles(int setMiles)
+    {
+        miles = setMiles;
+    }
     public String getDogAge()
     {
         return dogAge;
@@ -115,5 +122,9 @@ public class Filter {
         return humanGender;
     }
 
+    public int getMiles()
+    {
+        return miles;
+    }
 
 }

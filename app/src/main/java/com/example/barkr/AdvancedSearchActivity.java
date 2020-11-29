@@ -13,23 +13,28 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AdvancedSearchActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
 
-    EditText dogAgeNum, humanAgeNum;
+    EditText dogAgeNum, humanAgeNum, milesNum;
     CheckBox dogMale, dogFemale, humanMale, humanFemale, spayedNeutered, shotsUpToDate;
     Switch saveFilters;
     Spinner dogAgeDescription, breed;
@@ -52,9 +57,11 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
         dogAgeDescriptionValues.add("months");
         dogAgeDescriptionValues.add("years");
         dogAgeDescriptionValues.add("days");
+
         //initialize variables and set listeners
         dogAgeNum = findViewById(R.id.editTextDogAge);
         humanAgeNum = findViewById(R.id.editTextHumanAge);
+        milesNum = findViewById(R.id.editTextMiles);
 
         dogMale = findViewById(R.id.checkBoxMaleDog);
         dogFemale = findViewById(R.id.checkBoxFemaleDog);
@@ -98,6 +105,7 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
 
                     dogAgeNum.setText(filterValue.getDogAge());
                     humanAgeNum.setText(filterValue.getHumanAge());
+                    milesNum.setText(Integer.toString(filterValue.getMiles()));
                     if(filterValue.getDogGender().size() == 2)
                     {
                         dogMale.setChecked(true);
@@ -206,11 +214,13 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
             {
                 dogGenderVal.add("f");
             }
-            Filter f = new Filter(dogAge, dogAgeDesc, dogGenderVal, spayNeutered, shotsUpToDateVal, breedVal, humanAge, humanGenderVal);
+            int miles = Integer.parseInt(milesNum.getText().toString());
+            f = new Filter(dogAge, dogAgeDesc, dogGenderVal, spayNeutered, shotsUpToDateVal, breedVal, humanAge, humanGenderVal, miles);
             DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
             DatabaseReference filterRef = rootRef.child("users").child(user.getUid()).child("filters");
             filterRef.setValue(f);
         }
+        //send values to another activity or screen08/26/1998
         Intent intent = new Intent(getBaseContext(), SearchResultsActivity.class);
         intent.putExtra("SORTED_RESULTS", SearchThroughDatabase());
         startActivity(intent);
@@ -220,11 +230,74 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
     {
         ArrayList<User> searchReturn = new ArrayList<User>();
 
-        return Sort(searchReturn);
+        //receive values from the database other than the current user
+        final String currUserId = user.getUid();
+        final ArrayList<User> databaseValues = new ArrayList<User>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference().child("users");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot userSnapshot: snapshot.getChildren())
+                {
+                    //checks if the current user it is looking at has the same userid as the person signed in
+                    //if it doesnt, add it to the array list to search through
+                    if(!(userSnapshot.getValue(User.class).getUserId().equals(currUserId)))
+                    {
+                        databaseValues.add(userSnapshot.getValue(User.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("AdvancedSearch", "loadPost:onCancelled", error.toException());
+            }
+        });
+        //now we begin the run through the values to see if it matches the filters
+        //this list is going to split the values by the number of values that matched the filter
+        //this is so we can sort by most relevant and then by location
+        HashMap<Integer, ArrayList<User>> splitValues = new HashMap<Integer, ArrayList<User>>();
+        for(User u: databaseValues)
+        {
+            //First check if the value is within the given miles TODO
+
+            //if it is, compare it to the current filter data
+            int numMatching = u.numValuesMatch(f);
+            //Add the value to the array list at the location of how many values it matches
+            //checks if list already exists there. if not, create one, then add the user value at position numMatching
+            splitValues.putIfAbsent(numMatching, new ArrayList<User>());
+            splitValues.get(numMatching).add(u);
+        }
+        //iterate through the lists in the hashmap
+        for(Map.Entry<Integer, ArrayList<User>> ee : splitValues.entrySet())
+        {
+            int key = ee.getKey();
+            ArrayList<User> values = ee.getValue();
+
+            //sort the values in the current list by location TODO
+
+        }
+
+        //add the values to the search return in the order of most relevant to least relevant in the hashmap of lists
+        //here the value is 7 because there can be up to 7 values that match the filter given
+        for(int i = 7; i >= 0; i--)
+        {
+            if(splitValues.containsKey(i))
+            {
+                ArrayList<User> currUserList = splitValues.get(i);
+                for(int j = 0; j < currUserList.size(); j++)
+                {
+                    searchReturn.add(currUserList.get(j));
+                }
+            }
+        }
+        return searchReturn;
     }
 
     public ArrayList<User> Sort(ArrayList<User> givenArray)
     {
+        //sort by location distance TODO
         ArrayList<User> sortReturn = new ArrayList<User>();
 
         return sortReturn;

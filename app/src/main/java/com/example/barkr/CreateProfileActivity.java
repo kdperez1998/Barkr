@@ -75,7 +75,7 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         if(v == finish)
         {
-            //rewrite value to the database
+            //rewrite value to the database TODO
             //this is not checking if any values are empty or correct values! Will be changing soon
             //also I am using sample values for the dog profile right now. Will fix when I implement dog profile editing
             String name = editHumanName.getText().toString();

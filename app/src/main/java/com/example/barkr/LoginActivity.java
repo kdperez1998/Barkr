@@ -61,7 +61,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null)
         {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            //check if their profile is created in the database, if not, sent to the create activity page
+            FirebaseUser user = mAuth.getCurrentUser();
+            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference userRef = rootRef.child("users").child(user.getUid());
+            ValueEventListener listener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(!snapshot.exists())
+                    {
+                        //send the user to the create profile screen so they may input their profile information
+                        startActivity(new Intent(LoginActivity.this, CreateProfileActivity.class));
+                    }
+                    else
+                    {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.d("EmailPassword", error.getMessage());
+                }
+            };
+            userRef.addListenerForSingleValueEvent(listener);
+
         }
 
     }
@@ -101,7 +125,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     };
                     userRef.addListenerForSingleValueEvent(listener);
-
                 }
                 else
                 {
