@@ -1,13 +1,18 @@
 package com.example.barkr;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class HumanProfile {
+public class HumanProfile  implements java.io.Serializable{
     private String name, gender, location, phoneNumber, bio, DOB;
 
 
@@ -112,53 +117,52 @@ public class HumanProfile {
 
     public int getDOBMonth()
     {
-        /*
         String[] birthday = getDOB().split( "/");
         int month = Integer.parseInt(birthday[0]);
         return month;
-
-         */
-        return 0;
     }
 
     public int getDOBDay()
     {
-        /*
         String[] birthday = getDOB().split( "/");
         int day = Integer.parseInt(birthday[1]);
         return day;
-
-         */
-        return 0;
     }
 
     public int getDOBYear()
     {
-        /*
         String[] birthday = getDOB().split( "/");
         int year = Integer.parseInt(birthday[2]);
         return year;
-
-         */
-        return 0;
     }
 
     public int getage()
     {
-        /*
+        int age = 0;
         //parse out DOB to month, day, and year values
-        String[] birthday = getDOB().split( "/");
-        int day = Integer.parseInt(birthday[1]);
-        int month = Integer.parseInt(birthday[0]);
-        int year = Integer.parseInt(birthday[2]);
-
-        LocalDate l = LocalDate.of(year, month, day);
-        LocalDate now = LocalDate.now();
-        Period diff = Period.between(l, now);
+        //String[] birthday = getDOB().split( "/");
+        //int day = Integer.parseInt(birthday[1]);
+        //int month = Integer.parseInt(birthday[0]);
+        //int year = Integer.parseInt(birthday[2]);
+        String dob = getDOB();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date = formatter.parse(dob);
+            Instant instant = date.toInstant();
+            ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
+            LocalDate givenDate = zone.toLocalDate();
+            Period period = Period.between(givenDate, LocalDate.now());
+            age = period.getYears();
+        }
+        catch(Exception e)
+        {
+            Log.d("HumanProfileGetAge", e.toString());
+        }
+        //LocalDate l = LocalDate.of(year, month, day);
+        //LocalDate now = LocalDate.now();
+        //Period diff = Period.between(l, now);
         //return diff.getYears();
-
-         */
-        return 0;
+        return age;
     }
 
 }

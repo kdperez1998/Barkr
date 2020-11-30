@@ -180,8 +180,8 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
                             // set day of month , month and year value in the edit text
-                            editHumanDateOfBirth.setText(dayOfMonth + "/"
-                                    + (monthOfYear + 1) + "/" + year);
+                            editHumanDateOfBirth.setText((monthOfYear + 1) + "/"
+                                    + dayOfMonth + "/" + year);
 
                         }
                     }, mYear, mMonth, mDay);
@@ -201,8 +201,8 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
                             // set day of month , month and year value in the edit text
-                            editDogDateOfBirth.setText(dayOfMonth + "/"
-                                    + (monthOfYear + 1) + "/" + year);
+                            editDogDateOfBirth.setText((monthOfYear + 1) + "/"
+                                    + dayOfMonth + "/" + year);
 
                         }
                     }, mYear, mMonth, mDay);

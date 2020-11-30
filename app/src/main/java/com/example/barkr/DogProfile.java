@@ -1,9 +1,17 @@
 package com.example.barkr;
 
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
-public class DogProfile {
+public class DogProfile  implements java.io.Serializable{
     private String name, breed, gender, bio, DOB;
     private boolean spayedNeutered, shotUpToDate;
 
@@ -107,88 +115,110 @@ public class DogProfile {
 
     public int getDOBMonth()
     {
-        /*
         String[] birthday = getDOB().split( "/");
         int month = Integer.parseInt(birthday[0]);
         return month;
-
-         */
-        return 0;
     }
 
     public int getDOBDay()
     {
-        /*
         String[] birthday = getDOB().split( "/");
         int day = Integer.parseInt(birthday[1]);
         return day;
-
-         */
-        return 0;
     }
 
     public int getDOBYear()
     {
-        /*String[] birthday = getDOB().split( "/");
+        String[] birthday = getDOB().split( "/");
         int year = Integer.parseInt(birthday[2]);
-        return year;
-         */
-        int year = 0;
         return year;
     }
 
     public int getAgeYears()
     {
-        /*
+        int age = 0;
         //parse out DOB to month, day, and year values
-        String[] birthday = getDOB().split( "/");
-        int day = Integer.parseInt(birthday[1]);
-        int month = Integer.parseInt(birthday[0]);
-        int year = Integer.parseInt(birthday[2]);
-
-        LocalDate l = LocalDate.of(year, month, day);
-        LocalDate now = LocalDate.now();
-        Period diff = Period.between(l, now);
-        return diff.getYears();
-
-         */
-        return 0;
+        //String[] birthday = getDOB().split( "/");
+        //int day = Integer.parseInt(birthday[1]);
+        //int month = Integer.parseInt(birthday[0]);
+        //int year = Integer.parseInt(birthday[2]);
+        String dob = getDOB();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date = formatter.parse(dob);
+            Instant instant = date.toInstant();
+            ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
+            LocalDate givenDate = zone.toLocalDate();
+            Period period = Period.between(givenDate, LocalDate.now());
+            age = period.getYears();
+        }
+        catch(Exception e)
+        {
+            Log.d("DogProfileGetAgeYears", e.toString());
+        }
+        //LocalDate l = LocalDate.of(year, month, day);
+        //LocalDate now = LocalDate.now();
+        //Period diff = Period.between(l, now);
+        //return diff.getYears();
+        return age;
     }
 
     public int getAgeDays()
     {
-        /*
+        int age = 0;
         //parse out DOB to month, day, and year values
-        String[] birthday = getDOB().split( "/");
-        int day = Integer.parseInt(birthday[1]);
-        int month = Integer.parseInt(birthday[0]);
-        int year = Integer.parseInt(birthday[2]);
+        //String[] birthday = getDOB().split( "/");
+        //int day = Integer.parseInt(birthday[1]);
+        //int month = Integer.parseInt(birthday[0]);
+        //int year = Integer.parseInt(birthday[2]);
+        String dob = getDOB();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date = formatter.parse(dob);
+            Instant instant = date.toInstant();
+            ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
+            LocalDate givenDate = zone.toLocalDate();
+            age = (int) ChronoUnit.DAYS.between(givenDate, LocalDate.now());
 
-        LocalDate l = LocalDate.of(year, month, day);
-        LocalDate now = LocalDate.now();
-        Period diff = Period.between(l, now);
-        return diff.getDays();
-
-         */
-        return 0;
+        }
+        catch(Exception e)
+        {
+            Log.d("DogProfileGetAgeDays", e.toString());
+        }
+        //LocalDate l = LocalDate.of(year, month, day);
+        //LocalDate now = LocalDate.now();
+        //Period diff = Period.between(l, now);
+        //return diff.getYears();
+        return age;
     }
 
     public int getAgeMonths()
     {
-        /*
+        int age = 0;
         //parse out DOB to month, day, and year values
-        String[] birthday = getDOB().split( "/");
-        int day = Integer.parseInt(birthday[1]);
-        int month = Integer.parseInt(birthday[0]);
-        int year = Integer.parseInt(birthday[2]);
-
-        LocalDate l = LocalDate.of(year, month, day);
-        LocalDate now = LocalDate.now();
-        Period diff = Period.between(l, now);
-        return diff.getMonths();
-
-         */
-        return 0;
+        //String[] birthday = getDOB().split( "/");
+        //int day = Integer.parseInt(birthday[1]);
+        //int month = Integer.parseInt(birthday[0]);
+        //int year = Integer.parseInt(birthday[2]);
+        String dob = getDOB();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date = formatter.parse(dob);
+            Instant instant = date.toInstant();
+            ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
+            LocalDate givenDate = zone.toLocalDate();
+            Period period = Period.between(givenDate, LocalDate.now());
+            age = period.getMonths();
+        }
+        catch(Exception e)
+        {
+            Log.d("DogProfileGetAgeMonths", e.toString());
+        }
+        //LocalDate l = LocalDate.of(year, month, day);
+        //LocalDate now = LocalDate.now();
+        //Period diff = Period.between(l, now);
+        //return diff.getYears();
+        return age;
     }
 
 }

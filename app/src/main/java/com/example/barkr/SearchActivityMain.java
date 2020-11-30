@@ -44,6 +44,7 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
     FirebaseUser user;
     EditText searchBar;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_search_main, container, false);
@@ -140,7 +141,7 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
         //String testName = "Cody";
         //users
 
-        final String name = searchName;
+        final String name = searchName.toLowerCase();
         final ArrayList<User> allUsers = new ArrayList<User>();
         final ArrayList<User> matchedUsers = new ArrayList<User>();
 
@@ -154,18 +155,16 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
                     allUsers.add(userSnapshot.getValue(User.class));
                     for(int i = 0; i<allUsers.size();i++)
                     {
-                        if (allUsers.get(i).getHumanProfile().getname().equals(name))
+                        if (allUsers.get(i).getHumanProfile().getname().toLowerCase().equals(name))
                         {
                             matchedUsers.add(allUsers.get(i));
                         }
                     }
                     //send values to another activity or screen
-                    Intent intent = new Intent(getActivity(), SearchResultsActivity.class);
-                    //TODO finish with an extra value for the fragment to send to the activity
-                    //intent.putExtra("SORTED_RESULTS", matchedUsers);
-                    getContext().startActivity(intent);
+                    Intent intent = new Intent(getContext(), SearchResultsActivity.class);
+                    intent.putExtra("SORTED_RESULTS", matchedUsers);
 
-                    //System.out.println(matchedUsers.size());
+                    startActivity(intent);
                 }
             }
 

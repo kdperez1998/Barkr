@@ -2,7 +2,7 @@ package com.example.barkr;
 
 import java.util.ArrayList;
 
-public class User
+public class User implements java.io.Serializable
 {
     private HumanProfile humanProfile;
     private ArrayList<DogProfile> dogProfiles;

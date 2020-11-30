@@ -44,6 +44,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     List<String> cities = new ArrayList<String>();
     List<String> states = new ArrayList<String>();
     List<String> genders = new ArrayList<String>();
+    List<String> breeds = new ArrayList<String>();
     DatePickerDialog datePickerDialog;
 
     public void onCreate(Bundle savedInstanceState)
@@ -70,7 +71,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         spayedNeutered = findViewById(R.id.checkBoxSpayed_Neutered);
         shotsUpToDate = findViewById(R.id.checkBoxShotsUptodate);
 
-        finish = findViewById(R.id.button);
+        finish = findViewById(R.id.buttonFinishProfile);
         finish.setOnClickListener(this);
 
         //initialize and set values for the state spinner and its adapter
@@ -112,7 +113,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         dogBreedSpinner = findViewById(R.id.spinnerBreed);
         dogBreedSpinner.setOnItemSelectedListener(this);
-        List<String> breeds = new ArrayList<String>();
+        breeds = new ArrayList<String>();
         breeds.add("");
         breeds.add("corgi");
         breeds.add("beagle");
@@ -164,7 +165,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                             indexStates = i;
                         }
                     }
-                    //gender
+                    //gender for human
                     int indexHumanGender = 0;
                     for(int i = 0; i < genders.size(); i++)
                     {
@@ -179,14 +180,47 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     editHumanBio.setText(userValue.getHumanProfile().getbio());
                     editPhoneNumber.setText(userValue.getHumanProfile().getphoneNumber());
                     editHumanDateOfBirth.setText(userValue.getHumanProfile().getDOB());
-                    //TODO set dog values at begining of screen open
-
+                    //set dog values at begining of screen open
+                    editDogDateOfBirth.setText(userValue.getDogProfiles().get(0).getDOB());
+                    editDogName.setText(userValue.getDogProfiles().get(0).getname());
+                    editDogBio.setText(userValue.getDogProfiles().get(0).getbio());
+                    String dogGender = userValue.getDogProfiles().get(0).getgender();
+                    String dogBreed = userValue.getDogProfiles().get(0).getbreed();
+                    //gender for dog
+                    int indexDogGender = 0;
+                    for(int i = 0; i < genders.size(); i++)
+                    {
+                        if(genders.get(i).equals(dogGender))
+                        {
+                            indexDogGender = i;
+                        }
+                    }
+                    dogGenderSpinner.setSelection(indexDogGender);
+                    //Dog breed
+                    int indexDogBreed = 0;
+                    for(int i = 0; i < breeds.size(); i++)
+                    {
+                        if(breeds.get(i).equals(dogBreed))
+                        {
+                            indexDogBreed = i;
+                        }
+                    }
+                    dogBreedSpinner.setSelection(indexDogBreed);
+                    if(userValue.getDogProfiles().get(0).getShotUpToDate())
+                    {
+                        shotsUpToDate.setChecked(true);
+                    }
+                    if(userValue.getDogProfiles().get(0).getspayedNeutered())
+                    {
+                        spayedNeutered.setChecked(true);
+                    }
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("EmailPassword", error.getMessage());
+                Log.d("EditProfileActivity", error.getMessage());
             }
         };
         userRef.addListenerForSingleValueEvent(listener);
@@ -244,7 +278,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             User newUser = new User(email, hp, dogProfiles, user.getUid());
             myRef.child("users").child(user.getUid()).setValue(newUser);
 
-            startActivity(new Intent(EditProfileActivity.this, ViewProfileMain.class));
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("FRAGMENT_TO_LOAD", 3);
+            startActivity(intent);
         }
         if(v == editHumanDateOfBirth)
         {
@@ -260,8 +296,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
                             // set day of month , month and year value in the edit text
-                            editHumanDateOfBirth.setText(dayOfMonth + "/"
-                                    + (monthOfYear + 1) + "/" + year);
+                            editHumanDateOfBirth.setText((monthOfYear + 1) + "/"
+                                    + dayOfMonth + "/" + year);
 
                         }
                     }, mYear, mMonth, mDay);
@@ -281,8 +317,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
                             // set day of month , month and year value in the edit text
-                            editDogDateOfBirth.setText(dayOfMonth + "/"
-                                    + (monthOfYear + 1) + "/" + year);
+                            editDogDateOfBirth.setText((monthOfYear + 1) + "/"
+                                    + dayOfMonth + "/" + year);
 
                         }
                     }, mYear, mMonth, mDay);
