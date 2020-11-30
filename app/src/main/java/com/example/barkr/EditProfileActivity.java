@@ -349,4 +349,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    public boolean checkValues()
+    {
+        boolean returnValue = false;
+        return returnValue;
+    }
 }

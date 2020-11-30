@@ -18,9 +18,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/create_profile_toolbar"
+        app:menu="@menu/edit_profile_toolbar"
         app:subtitleTextColor="#FFFFFF"
-        app:title="Create Profile" />
+        app:title="Edit Profile" />
 
     <ScrollView
         android:layout_width="match_parent"

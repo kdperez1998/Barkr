@@ -29,10 +29,10 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         userList.add(new User("email", hp, dp, "userId"));
          */
 
-        //TODO get extra value from the previous activity/fragment
+        //get extra value from previous activity
         userList = (ArrayList<User>) getIntent().getSerializableExtra("SORTED_RESULTS");
 
-        //System.out.println(userList.size());
+        //set extra value to be shown in the adapter
         resultsRecycler = (RecyclerView) findViewById(R.id.RecyclerViewSearchResults);
         adapter = new SearchResultsAdapter(SearchResultsActivity.this, userList);
         resultsRecycler.setAdapter(adapter);
