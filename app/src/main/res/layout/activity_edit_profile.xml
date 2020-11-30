@@ -79,26 +79,14 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/TextEmaillabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="49dp"
-            android:text="@string/email"
-            android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/EditEmail"
-            app:layout_constraintTop_toBottomOf="@+id/TextBirthdate" />
-
-        <TextView
             android:id="@+id/text_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/state"
             android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/Spinner_State"
-            app:layout_constraintHorizontal_bias="0.116"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextEmaillabel" />
+            app:layout_constraintTop_toBottomOf="@+id/TextBirthdate" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -127,21 +115,6 @@
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/TextBirthdate"
             app:layout_constraintEnd_toStartOf="@+id/EditOwnerName" />
-
-        <EditText
-            android:id="@+id/EditEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="26dp"
-            android:ems="15"
-            android:importantForAutofill="no"
-            android:inputType="textLongMessage|text|textEmailAddress"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/text_state"
-            app:layout_constraintStart_toEndOf="@+id/TextEmaillabel"
-            app:layout_constraintTop_toBottomOf="@+id/EditDateofBirth"
-            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/TextBirthdate"
@@ -181,12 +154,12 @@
             android:id="@+id/Spinner_State"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="132dp"
-            android:layout_marginRight="132dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="72dp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/EditEmail" />
+            app:layout_constraintStart_toEndOf="@+id/text_state"
+            app:layout_constraintTop_toBottomOf="@+id/EditDateofBirth" />
 
         <TextView
             android:id="@+id/textPhone"

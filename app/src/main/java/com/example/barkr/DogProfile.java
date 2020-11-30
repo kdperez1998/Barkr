@@ -107,27 +107,39 @@ public class DogProfile {
 
     public int getDOBMonth()
     {
+        /*
         String[] birthday = getDOB().split( "/");
         int month = Integer.parseInt(birthday[0]);
         return month;
+
+         */
+        return 0;
     }
 
     public int getDOBDay()
     {
+        /*
         String[] birthday = getDOB().split( "/");
         int day = Integer.parseInt(birthday[1]);
         return day;
+
+         */
+        return 0;
     }
 
     public int getDOBYear()
     {
-        String[] birthday = getDOB().split( "/");
+        /*String[] birthday = getDOB().split( "/");
         int year = Integer.parseInt(birthday[2]);
+        return year;
+         */
+        int year = 0;
         return year;
     }
 
     public int getAgeYears()
     {
+        /*
         //parse out DOB to month, day, and year values
         String[] birthday = getDOB().split( "/");
         int day = Integer.parseInt(birthday[1]);
@@ -138,10 +150,14 @@ public class DogProfile {
         LocalDate now = LocalDate.now();
         Period diff = Period.between(l, now);
         return diff.getYears();
+
+         */
+        return 0;
     }
 
     public int getAgeDays()
     {
+        /*
         //parse out DOB to month, day, and year values
         String[] birthday = getDOB().split( "/");
         int day = Integer.parseInt(birthday[1]);
@@ -152,10 +168,14 @@ public class DogProfile {
         LocalDate now = LocalDate.now();
         Period diff = Period.between(l, now);
         return diff.getDays();
+
+         */
+        return 0;
     }
 
     public int getAgeMonths()
     {
+        /*
         //parse out DOB to month, day, and year values
         String[] birthday = getDOB().split( "/");
         int day = Integer.parseInt(birthday[1]);
@@ -166,6 +186,9 @@ public class DogProfile {
         LocalDate now = LocalDate.now();
         Period diff = Period.between(l, now);
         return diff.getMonths();
+
+         */
+        return 0;
     }
 
 }

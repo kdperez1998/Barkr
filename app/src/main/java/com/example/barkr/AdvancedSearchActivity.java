@@ -172,7 +172,7 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("EmailPassword", error.getMessage());
+                Log.d("AdvancedSearch", error.getMessage());
             }
         };
         filterRef.addListenerForSingleValueEvent(listener);
@@ -220,7 +220,7 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
             DatabaseReference filterRef = rootRef.child("users").child(user.getUid()).child("filters");
             filterRef.setValue(f);
         }
-        //send values to another activity or screen08/26/1998
+        //send values to another activity or screen
         Intent intent = new Intent(getBaseContext(), SearchResultsActivity.class);
         intent.putExtra("SORTED_RESULTS", SearchThroughDatabase());
         startActivity(intent);

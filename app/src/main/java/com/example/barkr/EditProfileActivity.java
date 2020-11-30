@@ -1,6 +1,7 @@
 package com.example.barkr;
 
 import android.R.layout;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -24,20 +27,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
-    EditText editHumanName, editHumanDateOfBirth, editEmail, editPhoneNumber, editHumanBio;
+    EditText editHumanName, editHumanDateOfBirth, editPhoneNumber, editHumanBio, editDogDateOfBirth, editDogName, editDogBio;
     ImageView profileImage, profilePicture;
     Button finish;
-    Spinner stateSpinner, citySpinner;
+    Spinner stateSpinner, citySpinner, humanGenderSpinner, dogGenderSpinner, dogBreedSpinner;
+    CheckBox spayedNeutered, shotsUpToDate;
     DatabaseReference myRef;
     private FirebaseDatabase database;
     private FirebaseUser user;
     private FirebaseAuth mAuth;
     List<String> cities = new ArrayList<String>();
     List<String> states = new ArrayList<String>();
+    List<String> genders = new ArrayList<String>();
+    DatePickerDialog datePickerDialog;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -50,10 +57,18 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         editHumanName = findViewById(R.id.EditOwnerName);
-        editHumanDateOfBirth = findViewById(R.id.EditDateofBirth);
-        editEmail = findViewById(R.id.EditEmail);
         editPhoneNumber = findViewById(R.id.editTextPhone);
         editHumanBio = findViewById(R.id.editBio);
+        editDogName = findViewById(R.id.editTextPetName);
+        editDogBio = findViewById(R.id.editTextPetBio);
+
+        editHumanDateOfBirth = findViewById(R.id.EditDateofBirth);
+        editHumanDateOfBirth.setOnClickListener(this);
+        editDogDateOfBirth = findViewById(R.id.editDogDateofBirth);
+        editDogDateOfBirth.setOnClickListener(this);
+
+        spayedNeutered = findViewById(R.id.checkBoxSpayed_Neutered);
+        shotsUpToDate = findViewById(R.id.checkBoxShotsUptodate);
 
         finish = findViewById(R.id.button);
         finish.setOnClickListener(this);
@@ -79,6 +94,31 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         adapterCities.setDropDownViewResource(layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(adapterCities);
 
+        humanGenderSpinner = findViewById(R.id.spinnerHumanGender);
+        humanGenderSpinner.setOnItemSelectedListener(this);
+        genders = new ArrayList<String>();
+        genders.add("");
+        genders.add("Female");
+        genders.add("Male");
+        ArrayAdapter adapterHumanGender = new ArrayAdapter(this, layout.simple_spinner_item, genders);
+        adapterHumanGender.setDropDownViewResource(layout.simple_spinner_dropdown_item);
+        humanGenderSpinner.setAdapter(adapterHumanGender);
+
+        dogGenderSpinner = findViewById(R.id.spinnerGender);
+        humanGenderSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter adapterDogGender = new ArrayAdapter(this, layout.simple_spinner_item, genders);
+        adapterDogGender.setDropDownViewResource(layout.simple_spinner_dropdown_item);
+        dogGenderSpinner.setAdapter(adapterDogGender);
+
+        dogBreedSpinner = findViewById(R.id.spinnerBreed);
+        dogBreedSpinner.setOnItemSelectedListener(this);
+        List<String> breeds = new ArrayList<String>();
+        breeds.add("");
+        breeds.add("corgi");
+        breeds.add("beagle");
+        ArrayAdapter adapterDogBreeds = new ArrayAdapter(this, layout.simple_spinner_item, breeds);
+        adapterDogBreeds.setDropDownViewResource(layout.simple_spinner_dropdown_item);
+        dogBreedSpinner.setAdapter(adapterDogBreeds);
     }
 
     @Override
@@ -103,6 +143,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     String[] location = userValue.getHumanProfile().getlocation().split(", ");
                     String city = location[0];
                     String state = location[1];
+                    String humanGender = userValue.getHumanProfile().getgender();
                     //find where the spinner will need to be selected to pre load the value and load the value
                     //cities
                     int indexCities = 0;
@@ -118,17 +159,27 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     //states
                     for(int i = 0; i < states.size(); i++)
                     {
-                        if(states.get(i).equals(city))
+                        if(states.get(i).equals(state))
                         {
                             indexStates = i;
                         }
                     }
-                    stateSpinner.setSelection(indexStates);
+                    //gender
+                    int indexHumanGender = 0;
+                    for(int i = 0; i < genders.size(); i++)
+                    {
+                        if(genders.get(i).equals(humanGender))
+                        {
+                            indexHumanGender = i;
+                        }
+                    }
+                    humanGenderSpinner.setSelection(indexHumanGender);
 
                     editHumanName.setText(userValue.getHumanProfile().getname());
                     editHumanBio.setText(userValue.getHumanProfile().getbio());
-                    editEmail.setText(userValue.getHumanProfile().getemail());
                     editPhoneNumber.setText(userValue.getHumanProfile().getphoneNumber());
+                    editHumanDateOfBirth.setText(userValue.getHumanProfile().getDOB());
+                    //TODO set dog values at begining of screen open
 
                 }
             }
@@ -146,22 +197,96 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if(v == finish)
         {
-            //rewrite value to the database TODO
-            //this is not checking if any values are empty or correct values! Will be changing soon
-            //also I am using sample values for the dog profile right now. Will fix when I implement dog profile editing
+            //rewrite value to the database
+            //this is not checking if any values are empty or correct values! Will be changing soon//TODO
             String name = editHumanName.getText().toString();
-            String gender = "none given";
+            String gender = "";
+            if(humanGenderSpinner.getSelectedItem().toString().equals("Female"))
+            {
+                gender = "f";
+            }
+            else if(humanGenderSpinner.getSelectedItem().toString().equals("Male"))
+            {
+                gender = "m";
+            }
             String location = citySpinner.getSelectedItem().toString() + ", " + stateSpinner.getSelectedItem().toString();
             String phone = editPhoneNumber.getText().toString();
-            String email = editPhoneNumber.getText().toString();
             String bio = editHumanBio.getText().toString();
-            //int age = editHumanDateOfBirth;
-            //HumanProfile hp = new HumanProfile(name, gender, location, phone, email, bio, 0);
-            //ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
-            //DogProfile dp = new DogProfile("Bagel", "Corgi", "m", false, true, "Hello", 1);
-            //dogProfiles.add(dp);
-            //User newUser = new User(editEmail.getText().toString(), hp, dogProfiles);
-            //myRef.child("users").child(user.getUid()).setValue(newUser);
+            String birthdate = editHumanDateOfBirth.getText().toString();
+            String email = user.getEmail();
+            HumanProfile hp = new HumanProfile(name, gender, location, phone, bio, birthdate);
+            ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
+            String dogName = editDogName.getText().toString();
+            String dogBreed = dogBreedSpinner.getSelectedItem().toString();
+            String dogGender = "";
+            if(dogGenderSpinner.getSelectedItem().toString().equals("Female"))
+            {
+                dogGender = "f";
+            }
+            else if(dogGenderSpinner.getSelectedItem().toString().equals("Male"))
+            {
+                dogGender = "m";
+            }
+            boolean spayNeuter = false;
+            boolean shotsUpDate = false;
+            if(spayedNeutered.isChecked() == true)
+            {
+                spayNeuter = true;
+            }
+            if(shotsUpToDate.isChecked() == true)
+            {
+                shotsUpDate = true;
+            }
+            String dogBio = editDogBio.getText().toString();
+            String dogBirthdate = editDogDateOfBirth.getText().toString();
+            DogProfile dp  = new DogProfile(dogName, dogBreed, dogGender, spayNeuter, shotsUpDate, dogBio, dogBirthdate);
+            dogProfiles.add(dp);
+            User newUser = new User(email, hp, dogProfiles, user.getUid());
+            myRef.child("users").child(user.getUid()).setValue(newUser);
+
+            startActivity(new Intent(EditProfileActivity.this, ViewProfileMain.class));
+        }
+        if(v == editHumanDateOfBirth)
+        {
+            final Calendar c = Calendar.getInstance();
+            int mYear = c.get(Calendar.YEAR); // current year
+            int mMonth = c.get(Calendar.MONTH); // current month
+            int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+            // date picker dialog
+            datePickerDialog = new DatePickerDialog(EditProfileActivity.this,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            // set day of month , month and year value in the edit text
+                            editHumanDateOfBirth.setText(dayOfMonth + "/"
+                                    + (monthOfYear + 1) + "/" + year);
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+        if(v == editDogDateOfBirth)
+        {
+            final Calendar c = Calendar.getInstance();
+            int mYear = c.get(Calendar.YEAR); // current year
+            int mMonth = c.get(Calendar.MONTH); // current month
+            int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+            // date picker dialog
+            datePickerDialog = new DatePickerDialog(EditProfileActivity.this,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            // set day of month , month and year value in the edit text
+                            editDogDateOfBirth.setText(dayOfMonth + "/"
+                                    + (monthOfYear + 1) + "/" + year);
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
         }
     }
 
@@ -175,6 +300,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         if(view == stateSpinner) {
             //stateSpinner.setSelection(pos);
+        }
+        if(view == humanGenderSpinner) {
+
+        }
+        if(view == dogGenderSpinner) {
+
         }
     }
 

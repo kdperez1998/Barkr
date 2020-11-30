@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class HumanProfile {
-    private String name, gender, location, phoneNumber, email, bio, DOB;
+    private String name, gender, location, phoneNumber, bio, DOB;
 
 
     public HumanProfile()
@@ -17,19 +17,17 @@ public class HumanProfile {
         gender = null;
         location = null;
         phoneNumber = null;
-        email = null;
         bio = null;
         DOB = null;
     }
 
     public HumanProfile(String setName, String setGender, String setLocation,
-                        String setPhoneNumber, String setEmail, String setBio, String setDOB)
+                        String setPhoneNumber, String setBio, String setDOB)
     {
         name = setName;
         gender = setGender;
         location = setLocation;
         phoneNumber = setPhoneNumber;
-        email = setEmail;
         bio = setBio;
         DOB = setDOB;
 
@@ -53,11 +51,6 @@ public class HumanProfile {
     public void setphoneNumber(String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
-    }
-
-    public void setemail(String email)
-    {
-        this.email = email;
     }
 
     public void setbio(String bio)
@@ -95,11 +88,6 @@ public class HumanProfile {
         return this.phoneNumber;
     }
 
-    public String getemail()
-    {
-        return this.email;
-    }
-
     public String getbio()
     {
         return this.bio;
@@ -124,27 +112,40 @@ public class HumanProfile {
 
     public int getDOBMonth()
     {
+        /*
         String[] birthday = getDOB().split( "/");
         int month = Integer.parseInt(birthday[0]);
         return month;
+
+         */
+        return 0;
     }
 
     public int getDOBDay()
     {
+        /*
         String[] birthday = getDOB().split( "/");
         int day = Integer.parseInt(birthday[1]);
         return day;
+
+         */
+        return 0;
     }
 
     public int getDOBYear()
     {
+        /*
         String[] birthday = getDOB().split( "/");
         int year = Integer.parseInt(birthday[2]);
         return year;
+
+         */
+        return 0;
     }
 
     public int getage()
     {
+        /*
         //parse out DOB to month, day, and year values
         String[] birthday = getDOB().split( "/");
         int day = Integer.parseInt(birthday[1]);
@@ -154,7 +155,10 @@ public class HumanProfile {
         LocalDate l = LocalDate.of(year, month, day);
         LocalDate now = LocalDate.now();
         Period diff = Period.between(l, now);
-        return diff.getYears();
+        //return diff.getYears();
+
+         */
+        return 0;
     }
 
 }

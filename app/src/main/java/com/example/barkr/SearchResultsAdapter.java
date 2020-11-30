@@ -22,11 +22,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     public SearchResultsAdapter(Context context, ArrayList<User> data)
     {
         this.mInflater = LayoutInflater.from(context);
-        this.resultsList = new ArrayList<User>();
-        for(int i =  0; i < data.size(); i++)
-        {
-            this.resultsList.add(data.get(i));
-        }
+        this.resultsList = data;
         c = context;
     }
 
@@ -45,7 +41,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         User u = resultsList.get(position);
         String name = u.getHumanProfile().getname();
 
-        //String name = u.getUsername();
         String dogAmount = u.getDogProfiles().size() + " " + u.getDogProfiles().get(0).getbreed();
 
         if(u.getDogProfiles().size() >= 2 || u.getDogProfiles().size() < 1)

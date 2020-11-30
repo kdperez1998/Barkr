@@ -22,14 +22,16 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_search_results);
 
         userList = new ArrayList<User>();
-        //User u = new User("livelikedragons");
-        //u.setDogProfiles();
-        //HumanProfile hp = new HumanProfile("Human", "f", "Texas", "", "kdperez", "hello", 12);
-        //u.setHumanProfile(hp);
-        //userList.add(u);
+        HumanProfile hp = new HumanProfile("name", "f", "Tyler, Texas", "903372", "hello", "12/12/1222");
+        DogProfile dogProfile = new DogProfile("pet", "corgi", "f", false, false, "hello", "12/12/1212");
+        ArrayList<DogProfile> dp = new ArrayList<DogProfile>();
+        dp.add(dogProfile);
+        userList.add(new User("email", hp, dp, "userId"));
 
-        userList = (ArrayList<User>) getIntent().getSerializableExtra("SORTED_RESULTS");
+        //TODO get extra value from the previous activity/fragment
+        //userList = (ArrayList<User>) getIntent().getSerializableExtra("SORTED_RESULTS");
 
+        //System.out.println(userList.size());
         resultsRecycler = (RecyclerView) findViewById(R.id.RecyclerViewSearchResults);
         adapter = new SearchResultsAdapter(SearchResultsActivity.this, userList);
         resultsRecycler.setAdapter(adapter);
