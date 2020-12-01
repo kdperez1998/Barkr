@@ -42,6 +42,10 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
 
     }
 
+
+
+
+
     //on click for buttons outside of recycler view
     @Override
     public void onClick(View v)
