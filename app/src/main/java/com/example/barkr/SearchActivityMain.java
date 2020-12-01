@@ -39,7 +39,7 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
 
     RecyclerView resultsRecycler;
     ArrayList<User> userList;
-    static SearchResultsAdapter adapter;
+    static SearchMainActivityAdapter adapter;
     Button advancedSearch;
     FirebaseUser user;
     EditText searchBar;
@@ -65,30 +65,35 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
         //ArrayList<DogProfile> dp = new ArrayList<DogProfile>();
         //dp.add(dogProfile);
         //userList.add(new User(user.getEmail(), hp, dp, user.getUid()));
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userRef = rootRef.child("users").child(user.getUid());
-        ValueEventListener listener = new ValueEventListener() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference().child("users");
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    User u = snapshot.getValue(User.class);
-                    userList.add(u);
-                    //System.out.println(u.getEmail());
-                    //System.out.println(userList.get(0).getHumanProfile().getname());
-                    resultsRecycler = (RecyclerView) getView().findViewById(R.id.RecyclerViewSearchMain);
-                    adapter = new SearchResultsAdapter(getActivity(), userList);
-                    resultsRecycler.setAdapter(adapter);
-                    //here the second attribute for GridLayoutManager is 2 because this is the amount of columns we will have in the recycler view
-                    resultsRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                for(DataSnapshot userSnapshot: snapshot.getChildren())
+                {
+                    userList.add(userSnapshot.getValue(User.class));
                 }
+                for(int i = 0; i<userList.size();i++)
+                {
+                    if (userList.get(i).getUserId().equals(user.getUid()))
+                    {
+                        userList.remove(i);
+                    }
+                }
+                resultsRecycler = (RecyclerView) getView().findViewById(R.id.RecyclerViewSearchMain);
+                adapter = new SearchMainActivityAdapter(getActivity(), userList);
+                resultsRecycler.setAdapter(adapter);
+                //here the second attribute for GridLayoutManager is 2 because this is the amount of columns we will have in the recycler view
+                resultsRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("SearchActivityMain", error.getMessage());
+                Log.w("SearchActivityMain", "loadPost:onCancelled", error.toException());
             }
-        };
-        userRef.addListenerForSingleValueEvent(listener);
+        });
+
 
         advancedSearch = getView().findViewById(R.id.AdvancedSearchButton);
         advancedSearch.setOnClickListener(this);
@@ -153,24 +158,24 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
                 for(DataSnapshot userSnapshot: snapshot.getChildren())
                 {
                     allUsers.add(userSnapshot.getValue(User.class));
-                    for(int i = 0; i<allUsers.size();i++)
-                    {
-                        if (allUsers.get(i).getHumanProfile().getname().toLowerCase().equals(name))
-                        {
-                            matchedUsers.add(allUsers.get(i));
-                        }
-                    }
-                    //send values to another activity or screen
-                    Intent intent = new Intent(getContext(), SearchResultsActivity.class);
-                    intent.putExtra("SORTED_RESULTS", matchedUsers);
-
-                    startActivity(intent);
                 }
+                for(int i = 0; i<allUsers.size();i++)
+                {
+                    if (allUsers.get(i).getHumanProfile().getname().toLowerCase().equals(name))
+                    {
+                        matchedUsers.add(allUsers.get(i));
+                    }
+                }
+                //send values to another activity or screen
+                Intent intent = new Intent(getContext(), SearchResultsActivity.class);
+                intent.putExtra("SORTED_RESULTS", matchedUsers);
+
+                startActivity(intent);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("SearchActivityMain", "loadPost:onCancelled", error.toException());
+                Log.w("SearchActivityMain nameSearch", "loadPost:onCancelled", error.toException());
             }
         });
 

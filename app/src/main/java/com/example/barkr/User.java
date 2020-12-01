@@ -72,14 +72,15 @@ public class User implements java.io.Serializable
                     returnValue += 1;
                 }
             }
-            else if(range.length == 2)
+            else if(range.length != 1)
             {
-                if((dogProfile.getAgeMonths() <= Integer.parseInt(range[1])) && (dogProfile.getAgeMonths() >= Integer.parseInt(range[0])))
+                if((dogProfile.getAgeMonths() >= Integer.parseInt(range[0])) && (dogProfile.getAgeMonths() <= Integer.parseInt(range[1])))
                 {
                     returnValue += 1;
                 }
             }
         }
+
         else if(f.getDogAgeDesc().equals("days"))
         {
             String range[] = f.getDogAge().split("-");
@@ -90,9 +91,9 @@ public class User implements java.io.Serializable
                     returnValue += 1;
                 }
             }
-            else if(range.length == 2)
+            else if(range.length != 1)
             {
-                if((dogProfile.getAgeDays() <= Integer.parseInt(range[1])) && (dogProfile.getAgeDays() >= Integer.parseInt(range[0])))
+                if((dogProfile.getAgeDays() >= Integer.parseInt(range[0])) && (dogProfile.getAgeDays() <= Integer.parseInt(range[1])))
                 {
                     returnValue += 1;
                 }
@@ -108,16 +109,16 @@ public class User implements java.io.Serializable
                     returnValue += 1;
                 }
             }
-            else if(range.length == 2)
+            else if(range.length != 1)
             {
-                if((dogProfile.getAgeYears() <= Integer.parseInt(range[1])) && (dogProfile.getAgeYears() >= Integer.parseInt(range[0])))
+                if((dogProfile.getAgeYears() >= Integer.parseInt(range[0])) && (dogProfile.getAgeYears() <= Integer.parseInt(range[1])))
                 {
                     returnValue += 1;
                 }
             }
         }
 
-        //compare gender selection
+        //compare dog gender selection
         ArrayList<String> genderDog = f.getDogGender();
         if(genderDog.size() == 1)
         {
@@ -126,6 +127,7 @@ public class User implements java.io.Serializable
                 returnValue += 1;
             }
         }
+
 
         //compare if spayed or neutered
         //if filter value is false, they have no preference, so only check the values if the filter value is true
@@ -150,27 +152,33 @@ public class User implements java.io.Serializable
 
 
         //compare human values
-        String range[] = f.getHumanAge().split("-");
-        if(range.length == 1 && humanProfile.getage() == Integer.parseInt(range[0]))
+        String rangeHuman[] = f.getHumanAge().split("-");
+        if(rangeHuman.length == 1 && !(rangeHuman[0].equals("")))
         {
-            returnValue += 1;
-        }
-        else if(range.length == 2)
-        {
-            if(humanProfile.getage() >= Integer.parseInt(range[0]) && humanProfile.getage() <= Integer.parseInt(range[1])) {
-                returnValue += 1;
-            }
-        }
-
-        //compare gender selection
-        ArrayList<String> genderHuman = f.getDogGender();
-        if(genderHuman.size() == 1)
-        {
-            if(genderHuman.get(0).equals(dogProfile.getgender()))
+            if(Integer.parseInt(f.getHumanAge()) == humanProfile.getage())
             {
                 returnValue += 1;
             }
         }
+        else if(rangeHuman.length != 1)
+        {
+            if((humanProfile.getage() >= Integer.parseInt(rangeHuman[0])) && (humanProfile.getage() <= Integer.parseInt(rangeHuman[1])))
+            {
+                returnValue += 1;
+            }
+        }
+
+        //compare human gender selection
+        ArrayList<String> genderHuman = f.getDogGender();
+
+        if(genderHuman.size() == 1)
+        {
+            if(genderHuman.get(0).equals(humanProfile.getgender()))
+            {
+                returnValue += 1;
+            }
+        }
+
 
         return returnValue;
     }

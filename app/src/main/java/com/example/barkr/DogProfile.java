@@ -149,8 +149,8 @@ public class DogProfile  implements java.io.Serializable{
             Instant instant = date.toInstant();
             ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
             LocalDate givenDate = zone.toLocalDate();
-            Period period = Period.between(givenDate, LocalDate.now());
-            age = period.getYears();
+            age = (int) ChronoUnit.YEARS.between(givenDate, LocalDate.now());
+
         }
         catch(Exception e)
         {
@@ -207,8 +207,8 @@ public class DogProfile  implements java.io.Serializable{
             Instant instant = date.toInstant();
             ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
             LocalDate givenDate = zone.toLocalDate();
-            Period period = Period.between(givenDate, LocalDate.now());
-            age = period.getMonths();
+            age = (int) ChronoUnit.MONTHS.between(givenDate, LocalDate.now());
+
         }
         catch(Exception e)
         {

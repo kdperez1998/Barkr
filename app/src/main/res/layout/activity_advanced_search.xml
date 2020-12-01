@@ -9,9 +9,9 @@
 
     <EditText
         android:id="@+id/editTextMiles"
-        android:layout_width="81dp"
-        android:layout_height="39dp"
-        android:layout_marginBottom="124dp"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="number"
@@ -19,64 +19,64 @@
         android:textColorHighlight="@color/barkrRed"
         android:textColorHint="#FFFFFF"
         android:textColorLink="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.102"
         app:layout_constraintStart_toEndOf="@+id/textViewWhile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGenderHuman2"
         tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textViewMiles"
-        android:layout_width="50dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Miles"
         android:textColor="@color/barkrRed"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/editTextMiles"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxFemaleHuman" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewGenderHuman2" />
 
     <TextView
         android:id="@+id/textViewGenderHuman2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
+        android:layout_marginTop="20dp"
         android:text="@string/gender"
         android:textColor="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.122"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAgeExplanationHuman"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAgeExplanationHuman" />
 
     <Spinner
         android:id="@+id/SpinnerAgeDog"
-        android:layout_width="90dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="544dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextDogAge"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
         tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textViewWhile"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Within"
         android:textColor="@color/barkrRed"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textViewGenderHuman2"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxFemaleHuman" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewGenderHuman2" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -110,38 +110,36 @@
         android:id="@+id/textViewHumanAttributes"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
-        android:layout_marginBottom="292dp"
+        android:layout_marginTop="20dp"
         android:text="@string/human_attributes"
         android:textColor="#898989"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerBreed" />
 
     <CheckBox
         android:id="@+id/checkBoxShotsUpToDate"
-        android:layout_width="89dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="392dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textViewShotsUpToDate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSpayedNeutered" />
 
     <Spinner
         android:id="@+id/spinnerBreed"
-        android:layout_width="90dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="344dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
         android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.314"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewBreed"
+        app:layout_constraintTop_toBottomOf="@+id/textViewShotsUpToDate"
         tools:ignore="LabelFor" />
 
     <TextView
@@ -154,105 +152,90 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
-    <TextView
-        android:id="@+id/textViewGenderHuman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
-        android:text="@string/gender"
-        android:textColor="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAgeExplanationHuman"
-        app:layout_constraintVertical_bias="0.052" />
-
     <CheckBox
         android:id="@+id/checkBoxMaleHuman"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="176dp"
+        android:layout_marginTop="15dp"
         android:text="@string/male"
         android:textColor="#898989"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.316"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAgeExplanationHuman" />
 
     <EditText
         android:id="@+id/editTextHumanAge"
-        android:layout_width="74dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="256dp"
+        android:layout_width="81dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
         android:autofillHints=""
         android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:inputType="number|text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.278"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHumanAttributes"
         tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textViewHumanage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="264dp"
+        android:layout_marginTop="20dp"
         android:text="@string/age"
         android:textColor="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHumanAttributes" />
 
     <TextView
         android:id="@+id/textViewSpayedNeutered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="436dp"
+        android:layout_marginTop="20dp"
         android:text="@string/spayed_neutered"
         android:textColor="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
     <TextView
         android:id="@+id/textViewGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="480dp"
+        android:layout_marginTop="10dp"
         android:text="@string/gender"
         android:textColor="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAgeExplationDog" />
 
     <TextView
         android:id="@+id/textViewBreed"
-        android:layout_width="110dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="352dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Breed:"
         android:textColor="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewShotsUpToDate"
         tools:text="Breed" />
 
     <CheckBox
         android:id="@+id/checkBoxSpayedNeutered"
-        android:layout_width="91dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="436dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textViewSpayedNeutered"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
     <Switch
         android:id="@+id/filterSwitch"
@@ -269,13 +252,13 @@
         android:id="@+id/textViewShotsUpToDate"
         android:layout_width="110dp"
         android:layout_height="23dp"
-        android:layout_marginBottom="392dp"
+        android:layout_marginTop="20dp"
         android:text="@string/shots_up_to_date"
         android:textColor="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSpayedNeutered" />
 
     <Button
         android:id="@+id/searchButton"
@@ -292,79 +275,79 @@
 
     <CheckBox
         android:id="@+id/checkBoxFemaleDog"
-        android:layout_width="80dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="476dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/female"
         android:textColor="#898989"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAgeExplationDog" />
 
     <TextView
         android:id="@+id/textViewAgeExplanationHuman"
-        android:layout_width="366dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="208dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:text="Enter a single number or a range of format x-x\nEx. 1-2"
         android:textColor="#898989"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextHumanAge"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextHumanAge" />
 
     <TextView
         android:id="@+id/textViewAgeExplationDog"
-        android:layout_width="366dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="208dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         android:text="Enter a single number or a range of format x-x\nEx. 1-2"
         android:textColor="#898989"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDogAge"
-        app:layout_constraintVertical_bias="0.013" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDogAge" />
 
     <CheckBox
         android:id="@+id/checkBoxMaleDog"
-        android:layout_width="64dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="472dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/male"
         android:textColor="#898989"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.268"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAgeExplationDog" />
 
     <CheckBox
         android:id="@+id/checkBoxFemaleHuman"
-        android:layout_width="79dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="176dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="@string/female"
         android:textColor="#898989"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.581"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAgeExplanationHuman" />
 
     <TextView
         android:id="@+id/textViewAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="560dp"
+        android:layout_marginTop="20dp"
         android:text="@string/age"
         android:textColor="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <TextView
         android:id="@+id/textView11"
@@ -382,18 +365,18 @@
     <EditText
         android:id="@+id/editTextDogAge"
         android:layout_width="81dp"
-        android:layout_height="39dp"
-        android:layout_marginBottom="548dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:importantForAutofill="no"
-        android:inputType="number"
+        android:inputType="number|text"
         android:textColorHighlight="@color/barkrRed"
         android:textColorHint="#FFFFFF"
         android:textColorLink="@color/barkrRed"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.287"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -446,16 +429,15 @@
     <TextView
         android:id="@+id/textViewExplanation"
         android:layout_width="366dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="640dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/please_input_any_specific_attributes_to_search_by_below_every_value_left_blank_will_be_ignored"
         android:textColor="#898989"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

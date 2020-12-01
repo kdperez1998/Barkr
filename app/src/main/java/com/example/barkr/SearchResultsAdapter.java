@@ -1,6 +1,7 @@
 package com.example.barkr;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +88,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         {
             if(v == itemView)
             {
-                //load the viewProfileActivity
+                //load the viewProfileActivity with user clicked on
+                Intent intent = new Intent(c, ViewProfileActivity.class);
+                intent.putExtra("USER_PROFILE", getItem(getPosition()));
+
+                c.startActivity(intent);
+
             }
         }
 

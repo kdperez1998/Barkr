@@ -3,6 +3,7 @@ package com.example.barkr;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +44,7 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
     FirebaseUser user;
     ArrayList<String> breeds, dogAgeDescriptionValues;
     Filter f;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,11 +52,21 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_search);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         breeds = new ArrayList<String>();
+        breeds.add("");
         breeds.add("corgi");
         breeds.add("beagle");
 
         dogAgeDescriptionValues = new ArrayList<String>();
+        dogAgeDescriptionValues.add("");
         dogAgeDescriptionValues.add("months");
         dogAgeDescriptionValues.add("years");
         dogAgeDescriptionValues.add("days");
@@ -179,86 +192,97 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
     }
         @Override
     public void onClick(View v) {
-        //save filters to the database to auto fill for later
-        if(saveFilters.isChecked())
-        {
-            String dogAge = dogAgeNum.getText().toString();
-            String humanAge = humanAgeNum.getText().toString();
-            String dogAgeDesc = dogAgeDescription.getSelectedItem().toString();
-            String breedVal = breed.getSelectedItem().toString();
-            boolean spayNeutered = false;
-            boolean shotsUpToDateVal = false;
-            if (spayedNeutered.isChecked() == true)
+        if(v == search) {
+            if((!dogAgeNum.getText().toString().equals("")))
             {
-                spayNeutered = true;
+                if((dogAgeDescription.getSelectedItem().equals("")))
+                {
+                    dogAgeNum.setError("Please specify days/months/years on the right when selecting an age");
+                }
             }
-            if (shotsUpToDate.isChecked() == true)
+            else if(!dogAgeDescription.getSelectedItem().equals(""))
             {
-                shotsUpToDateVal = true;
+                if(dogAgeNum.getText().toString().equals(""))
+                {
+                    dogAgeNum.setError("Must not be left blank when given months/days/years");
+                }
             }
-            ArrayList<String> dogGenderVal = new ArrayList<String>();
-            ArrayList<String> humanGenderVal = new ArrayList<String>();
-            if(humanMale.isChecked() == true)
-            {
-                humanGenderVal.add("m");
+            else {
+                //save filters to the database to auto fill for later
+                String dogAge = dogAgeNum.getText().toString();
+                String humanAge = humanAgeNum.getText().toString();
+                String dogAgeDesc = dogAgeDescription.getSelectedItem().toString();
+                String breedVal = breed.getSelectedItem().toString();
+                boolean spayNeutered = false;
+                boolean shotsUpToDateVal = false;
+                if (spayedNeutered.isChecked() == true) {
+                    spayNeutered = true;
+                }
+                if (shotsUpToDate.isChecked() == true) {
+                    shotsUpToDateVal = true;
+                }
+                ArrayList<String> dogGenderVal = new ArrayList<String>();
+                ArrayList<String> humanGenderVal = new ArrayList<String>();
+                if (humanMale.isChecked() == true) {
+                    humanGenderVal.add("m");
+                }
+                if (humanFemale.isChecked() == true) {
+                    humanGenderVal.add("f");
+                }
+                if (dogMale.isChecked() == true) {
+                    dogGenderVal.add("m");
+                }
+                if (dogFemale.isChecked() == true) {
+                    dogGenderVal.add("f");
+                }
+                int miles = Integer.parseInt(milesNum.getText().toString());
+                f = new Filter(dogAge, dogAgeDesc, dogGenderVal, spayNeutered, shotsUpToDateVal, breedVal, humanAge, humanGenderVal, miles);
+                if (saveFilters.isChecked()) {
+                    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference filterRef = rootRef.child("users").child(user.getUid()).child("filters");
+                    filterRef.setValue(f);
+                }
+
+                //receive values from the database other than the current user
+                final String currUserId = user.getUid();
+                final ArrayList<User> databaseValues = new ArrayList<User>();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference().child("users");
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                            //checks if the current user it is looking at has the same userid as the person signed in
+                            //if it doesnt, add it to the array list to search through
+                            if (!(userSnapshot.getValue(User.class).getUserId().equals(currUserId))) {
+                                databaseValues.add(userSnapshot.getValue(User.class));
+                            }
+                        }
+                        //send values to another activity or screen
+                        ArrayList<User> results = SearchThroughDatabase(databaseValues);
+                        Intent intent = new Intent(AdvancedSearchActivity.this, SearchResultsActivity.class);
+                        intent.putExtra("SORTED_RESULTS", results);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.w("AdvancedSearch", "loadPost:onCancelled", error.toException());
+                    }
+                });
             }
-            if(humanFemale.isChecked() == true)
-            {
-                humanGenderVal.add("f");
-            }
-            if(dogMale.isChecked() == true)
-            {
-                dogGenderVal.add("m");
-            }
-            if(dogFemale.isChecked() == true)
-            {
-                dogGenderVal.add("f");
-            }
-            int miles = Integer.parseInt(milesNum.getText().toString());
-            f = new Filter(dogAge, dogAgeDesc, dogGenderVal, spayNeutered, shotsUpToDateVal, breedVal, humanAge, humanGenderVal, miles);
-            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-            DatabaseReference filterRef = rootRef.child("users").child(user.getUid()).child("filters");
-            filterRef.setValue(f);
         }
-        //send values to another activity or screen
-        Intent intent = new Intent(getBaseContext(), SearchResultsActivity.class);
-        intent.putExtra("SORTED_RESULTS", SearchThroughDatabase());
-        startActivity(intent);
     }
 
-    public ArrayList<User> SearchThroughDatabase()
+    public ArrayList<User> SearchThroughDatabase(ArrayList<User> searchList)
     {
         ArrayList<User> searchReturn = new ArrayList<User>();
 
-        //receive values from the database other than the current user
-        final String currUserId = user.getUid();
-        final ArrayList<User> databaseValues = new ArrayList<User>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference().child("users");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot userSnapshot: snapshot.getChildren())
-                {
-                    //checks if the current user it is looking at has the same userid as the person signed in
-                    //if it doesnt, add it to the array list to search through
-                    if(!(userSnapshot.getValue(User.class).getUserId().equals(currUserId)))
-                    {
-                        databaseValues.add(userSnapshot.getValue(User.class));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("AdvancedSearch", "loadPost:onCancelled", error.toException());
-            }
-        });
         //now we begin the run through the values to see if it matches the filters
         //this list is going to split the values by the number of values that matched the filter
         //this is so we can sort by most relevant and then by location
         HashMap<Integer, ArrayList<User>> splitValues = new HashMap<Integer, ArrayList<User>>();
-        for(User u: databaseValues)
+        for(User u: searchList)
         {
             //First check if the value is within the given miles TODO
 
@@ -268,13 +292,20 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
             //checks if list already exists there. if not, create one, then add the user value at position numMatching
             splitValues.putIfAbsent(numMatching, new ArrayList<User>());
             splitValues.get(numMatching).add(u);
+            System.out.println(numMatching);
+            System.out.println(u.getHumanProfile().getname());
+            System.out.println(u.getDogProfiles().get(0).getbreed());
+            System.out.println("~~~~~~~~~~~~~~~~");
         }
         //iterate through the lists in the hashmap
         for(Map.Entry<Integer, ArrayList<User>> ee : splitValues.entrySet())
         {
             int key = ee.getKey();
             ArrayList<User> values = ee.getValue();
-
+            for(User value : values)
+            {
+                System.out.println(value.getHumanProfile().getname());
+            }
             //sort the values in the current list by location TODO
 
         }
@@ -319,5 +350,13 @@ public class AdvancedSearchActivity extends AppCompatActivity implements View.On
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

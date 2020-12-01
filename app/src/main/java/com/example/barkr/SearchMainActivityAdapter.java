@@ -1,6 +1,7 @@
 package com.example.barkr;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,7 @@ public class SearchMainActivityAdapter extends RecyclerView.Adapter<SearchMainAc
 
             profileName = (TextView) itemView.findViewById(R.id.ProfileName);
             amountDogs = (TextView) itemView.findViewById(R.id.DogAmount);
-            favoriteButton = (ImageButton) itemView.findViewById(R.id.FavoriteButton);
+            favoriteButton = (ImageButton) itemView.findViewById(R.id.favoriteButton);
             favoriteButton.setOnClickListener(this);
             profilePicture = (ImageView) itemView.findViewById(R.id.ProfilePicture);
             profilePicture.setOnClickListener(this);
@@ -78,7 +79,15 @@ public class SearchMainActivityAdapter extends RecyclerView.Adapter<SearchMainAc
         @Override
         public void onClick(View v)
         {
+            if(v == itemView)
+            {
+                //load viewprofileactivity with user clicked on
+                Intent intent = new Intent(c, ViewProfileActivity.class);
+                intent.putExtra("USER_PROFILE", getItem(getPosition()));
 
+                c.startActivity(intent);
+
+            }
         }
     }
 

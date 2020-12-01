@@ -17,6 +17,7 @@
         <activity android:name=".CreateProfileActivity"></activity>
         <activity android:name=".ChannelListActivity"></activity>
         <activity android:name=".ChannelActivity"></activity>
+        <activity android:name=".ViewProfileActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">

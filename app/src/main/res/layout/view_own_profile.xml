@@ -22,6 +22,8 @@
             android:id="@+id/editProfileButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
             android:clickable="true"
             android:contentDescription="@string/FloatingEditButton"
             android:focusable="true"
@@ -33,11 +35,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/moreOptionsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:clickable="true"
             android:longClickable="false"
             android:src="@drawable/ic_more_vertical"
@@ -65,14 +67,10 @@
             android:id="@+id/TextViewUser"
             android:layout_width="102dp"
             android:layout_height="27dp"
-            android:layout_marginStart="157dp"
-            android:layout_marginLeft="157dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="194dp"
-            android:layout_marginRight="194dp"
+            android:layout_marginTop="80dp"
+            android:gravity="center_horizontal"
             android:text="@string/Owner_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.357"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageofownUser" />
 
@@ -80,10 +78,9 @@
             android:id="@+id/UsersGenderAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
             android:text="Gender, Age"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextViewUser" />
 
@@ -124,11 +121,12 @@
 
         <TextView
             android:id="@+id/TextDisplaysContact"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="80dp"
             android:text="Contact Info"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextDisplaysUsersCityState" />
 
@@ -149,23 +147,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:layout_marginEnd="160dp"
-            android:layout_marginRight="160dp"
+            android:layout_marginEnd="145dp"
             android:text="@string/numberofpets"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextDisplaysContact" />
 
         <TextView
             android:id="@+id/TextDislaysOwnersBio"
-            android:layout_width="155dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="420dp"
+            android:layout_marginTop="310dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -174,10 +168,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
             android:contentDescription="@string/PetsImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -188,11 +180,8 @@
             android:id="@+id/TextdiplaysPetsName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
+            android:gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
             android:text="@string/pet_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -202,10 +191,10 @@
             android:id="@+id/TextDisplaysPetsGenderAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
             android:layout_marginTop="6dp"
+            android:gravity="center_horizontal"
             android:text="Gender, Age"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextdiplaysPetsName" />
 
@@ -224,8 +213,7 @@
             android:id="@+id/TextDisplaysBreed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="204dp"
-            android:layout_marginRight="204dp"
+            android:layout_marginEnd="160dp"
             android:text="@string/breed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
@@ -246,9 +234,8 @@
             android:id="@+id/TextDisplaysSpayedNeutered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="100dp"
             android:text="@string/displayspayed_neutered"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
@@ -270,8 +257,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginRight="70dp"
+            android:layout_marginEnd="100dp"
             android:text="@string/shots_up_to_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextDisplaysSpayedNeutered" />

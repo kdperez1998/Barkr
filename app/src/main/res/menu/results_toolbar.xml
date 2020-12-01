@@ -5,6 +5,6 @@
     <item
         android:id="@+id/back_button"
         android:icon="@drawable/ic_arrow_back_white_48pt_3x"
-        android:title=""
+        android:title="Search Results"
         app:showAsAction="always" />
 </menu>

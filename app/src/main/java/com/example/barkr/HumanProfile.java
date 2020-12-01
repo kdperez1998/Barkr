@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -151,12 +152,12 @@ public class HumanProfile  implements java.io.Serializable{
             Instant instant = date.toInstant();
             ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
             LocalDate givenDate = zone.toLocalDate();
-            Period period = Period.between(givenDate, LocalDate.now());
-            age = period.getYears();
+            age = (int) ChronoUnit.YEARS.between(givenDate, LocalDate.now());
+
         }
         catch(Exception e)
         {
-            Log.d("HumanProfileGetAge", e.toString());
+            Log.d("DogProfileGetAgeYears", e.toString());
         }
         //LocalDate l = LocalDate.of(year, month, day);
         //LocalDate now = LocalDate.now();

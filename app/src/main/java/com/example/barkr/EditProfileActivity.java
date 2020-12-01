@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,11 +48,20 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     List<String> genders = new ArrayList<String>();
     List<String> breeds = new ArrayList<String>();
     DatePickerDialog datePickerDialog;
+    Toolbar toolbar;
 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -173,7 +184,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         dogBreedSpinner.setOnItemSelectedListener(this);
         breeds = new ArrayList<String>();
 
-        //add all breeds from AKC website
+        //add all breeds from AKC website, manually added since an API was not found in time
         breeds.add("");
         breeds.add("Affenpinscher");
         breeds.add("Afghan Hound");
@@ -508,7 +519,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     int indexHumanGender = 0;
                     for(int i = 0; i < genders.size(); i++)
                     {
-                        if(genders.get(i).equals(humanGender))
+                        if((genders.get(i).equals("Female") && humanGender.equals("f") || (genders.get(i).equals("Male") && humanGender.equals("m"))))
                         {
                             indexHumanGender = i;
                         }
@@ -529,7 +540,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     int indexDogGender = 0;
                     for(int i = 0; i < genders.size(); i++)
                     {
-                        if(genders.get(i).equals(dogGender))
+                        if((genders.get(i).equals("Female") && dogGender.equals("f") || (genders.get(i).equals("Male") && dogGender.equals("m"))))
                         {
                             indexDogGender = i;
                         }
@@ -693,5 +704,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     {
         boolean returnValue = false;
         return returnValue;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

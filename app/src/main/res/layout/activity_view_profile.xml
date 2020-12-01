@@ -1,35 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:background="@color/cardview_light_background">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:gravity="center_horizontal"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:buttonGravity="top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/view_profile_toolbar" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="60dp"
+        android:padding="70dp"
         android:verticalScrollbarPosition="defaultPosition"
         android:visibility="visible"
         tools:context=".ViewOwnProfile">
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/FloatingEditButton"
+            android:id="@+id/FavoriteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
             android:clickable="true"
-            android:src="@android:drawable/ic_menu_edit"
+            android:contentDescription="@string/FloatingEditButton"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_favorite_border_3x"
             android:tint="@color/barkrRed"
             app:backgroundTint="@color/cardview_light_background"
+            app:fabSize="normal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/FloatingEditButton"
-            android:focusable="true" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/MessagingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:longClickable="false"
+            android:src="@android:drawable/stat_notify_chat"
+            android:tint="@color/barkrRed"
+            app:backgroundTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageofownUser"
@@ -40,47 +75,31 @@
             android:layout_marginTop="72dp"
             android:layout_marginEnd="76dp"
             android:layout_marginRight="76dp"
+            android:contentDescription="@string/ImageofownUser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars"
-            android:contentDescription="@string/ImageofownUser" />
+            tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/TextViewUser"
             android:layout_width="102dp"
             android:layout_height="27dp"
-            android:layout_marginStart="157dp"
-            android:layout_marginLeft="157dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="194dp"
-            android:layout_marginRight="194dp"
+            android:layout_marginTop="80dp"
+            android:gravity="center_horizontal"
             android:text="@string/Owner_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.357"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageofownUser" />
 
         <TextView
-            android:id="@+id/UsersGender"
+            android:id="@+id/UsersGenderAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/Humangender"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextViewUser" />
-
-        <TextView
-            android:id="@+id/UsersAge"
-            android:layout_width="60dp"
-            android:layout_height="19dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="84dp"
-            android:layout_marginRight="84dp"
-            android:text="@string/humans_dob"
+            android:gravity="center_horizontal"
+            android:text="Gender, Age"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextViewUser" />
 
         <TextView
@@ -93,33 +112,18 @@
             android:text="@string/location"
             android:textColor="@color/barkrRed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/UsersGender" />
+            app:layout_constraintTop_toBottomOf="@+id/UsersGenderAge" />
 
         <TextView
-            android:id="@+id/textuserlocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
-            android:text="@string/state"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/TextDisplaysUsersCity"
-            app:layout_constraintTop_toBottomOf="@+id/UsersGender" />
-
-        <TextView
-            android:id="@+id/TextDisplaysUsersCity"
+            android:id="@+id/TextDisplaysUsersCityState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="8dp"
-            android:text="@string/City"
+            android:text="City, State"
             app:layout_constraintStart_toEndOf="@+id/textViewLocation"
-            app:layout_constraintTop_toBottomOf="@+id/UsersGender" />
+            app:layout_constraintTop_toBottomOf="@+id/UsersGenderAge" />
 
         <TextView
             android:id="@+id/DisplaysUsersContact"
@@ -135,14 +139,14 @@
 
         <TextView
             android:id="@+id/TextDisplaysContact"
-            android:layout_width="51dp"
-            android:layout_height="18dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="180dp"
-            android:layout_marginRight="180dp"
-            android:text="@string/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="80dp"
+            android:text="Contact Info"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textuserlocation" />
+            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysUsersCityState" />
 
         <TextView
             android:id="@+id/TextPets"
@@ -151,8 +155,8 @@
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="4dp"
-            android:textColor="@color/barkrRed"
             android:text="@string/pets"
+            android:textColor="@color/barkrRed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextDisplaysContact" />
 
@@ -161,23 +165,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:layout_marginEnd="160dp"
-            android:layout_marginRight="160dp"
+            android:layout_marginEnd="145dp"
             android:text="@string/numberofpets"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextDisplaysContact" />
 
         <TextView
             android:id="@+id/TextDislaysOwnersBio"
-            android:layout_width="155dp"
-            android:layout_height="36dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="420dp"
+            android:layout_marginTop="310dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -186,50 +186,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
+            android:contentDescription="@string/PetsImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextDislaysOwnersBio"
-            tools:src="@tools:sample/avatars"
-            android:contentDescription="@string/PetsImage" />
+            tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/TextdiplaysPetsName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
+            android:gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
             android:text="@string/pet_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewofPet" />
 
         <TextView
-            android:id="@+id/TextDisplaysPetsGender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/doggender"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextdiplaysPetsName" />
-
-        <TextView
-            android:id="@+id/TextdisplayPetsage"
+            android:id="@+id/TextDisplaysPetsGenderAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
-            android:text="@string/dogage"
+            android:gravity="center_horizontal"
+            android:text="Gender, Age"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextdiplaysPetsName" />
 
         <TextView
@@ -241,17 +225,16 @@
             android:text="@string/breed"
             android:textColor="@color/barkrRed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGender" />
+            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
 
         <TextView
             android:id="@+id/TextDisplaysBreed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="204dp"
-            android:layout_marginRight="204dp"
+            android:layout_marginEnd="160dp"
             android:text="@string/breed"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGender" />
+            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
 
         <TextView
             android:id="@+id/TextSpayedNuetered"
@@ -266,15 +249,14 @@
             app:layout_constraintTop_toBottomOf="@+id/TextDisplayBreed" />
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/TextDisplaysSpayedNeutered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="100dp"
             android:text="@string/displayspayed_neutered"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGender" />
+            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
 
         <TextView
             android:id="@+id/TextShotsUptoDate"
@@ -289,15 +271,14 @@
             app:layout_constraintTop_toBottomOf="@+id/TextSpayedNuetered" />
 
         <TextView
-            android:id="@+id/textView33"
+            android:id="@+id/TextDisplaysShotsUpToDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginRight="70dp"
+            android:layout_marginEnd="100dp"
             android:text="@string/shots_up_to_date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysSpayedNeutered" />
 
         <TextView
             android:id="@+id/textDisplaysBio"
@@ -311,7 +292,7 @@
             android:text="@string/Petsbio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysShotsUpToDate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
