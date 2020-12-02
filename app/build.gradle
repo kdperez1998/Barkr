@@ -54,6 +54,7 @@ dependencies {
     implementation "io.getstream:stream-chat-android:4.4.5"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.3.0-beta01"
     implementation "io.coil-kt:coil:1.0.0"
+    compile 'com.firebaseui:firebase-ui:0.6.0'
 
 
 }

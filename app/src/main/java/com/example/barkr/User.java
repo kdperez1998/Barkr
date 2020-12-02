@@ -1,13 +1,17 @@
 package com.example.barkr;
 
+import android.media.Image;
+
 import java.util.ArrayList;
 
 public class User implements java.io.Serializable
 {
     private HumanProfile humanProfile;
     private ArrayList<DogProfile> dogProfiles;
+    //ArrayList<User> favorites;
     private String email;
     String userId;
+    Image profilePicture;
 
     public User(String email, HumanProfile hp, ArrayList<DogProfile> dp, String uid)
     {
@@ -15,6 +19,7 @@ public class User implements java.io.Serializable
         this.setDogProfiles(dp);
         this.setEmail(email);
         this.setUserId(uid);
+        //this.favorites = new ArrayList<User>();
     }
 
     public User()
@@ -55,6 +60,9 @@ public class User implements java.io.Serializable
         this.userId = uid;
     }
 
+    /*public void setFavorites(ArrayList<User> f) {
+        this.favorites = f;
+    }*/
     public int numValuesMatch(Filter f)
     {
         int returnValue = 0;
@@ -197,4 +205,28 @@ public class User implements java.io.Serializable
     {
         return userId;
     }
+    /*
+    public ArrayList<User> getFavorites()
+    {
+        return favorites;
+    }
+
+    public void addUserToFavorites(User u)
+    {
+        favorites.add(u);
+    }
+
+    public void removeUserFromFavorites(User u)
+    {
+        ArrayList<User> newFavoritesList = new ArrayList<User>();
+        for(User f : favorites)
+        {
+            if(f.getUserId() != u.getUserId())
+            {
+                newFavoritesList.add(f);
+            }
+        }
+        this.setFavorites(newFavoritesList);
+    }*/
+
 }

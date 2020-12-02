@@ -1,8 +1,9 @@
 package com.example.barkr;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Filter {
+public class Filter implements Serializable {
     String dogAge, dogAgeDesc, breed, humanAge;
     boolean spayedNeutered, shotsUpToDate;
     ArrayList<String> dogGender, humanGender;

@@ -20,34 +20,34 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>
+public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdapter.ViewHolder>
 {
 
-    private ArrayList<User> resultsList;
+    private ArrayList<User> favoritesList;
     private LayoutInflater mInflater;
     Context c;
 
     //data passed into constructor
-    public SearchResultsAdapter(Context context, ArrayList<User> data)
+    public FavoritesListAdapter(Context context, ArrayList<User> data)
     {
         this.mInflater = LayoutInflater.from(context);
-        this.resultsList = data;
+        this.favoritesList = data;
         c = context;
     }
 
     //inflates the row layout from xml when needed
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public FavoritesListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view = mInflater.inflate(R.layout.search_results_row, parent, false);
+        View view = mInflater.inflate(R.layout.favorites_list_row, parent, false);
         return new ViewHolder(view);
     }
 
     //binds data to the text view in each row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position)
+    public void onBindViewHolder(FavoritesListAdapter.ViewHolder holder, int position)
     {
-        User u = resultsList.get(position);
+        User u = favoritesList.get(position);
         String name = u.getHumanProfile().getname();
 
         String dogAmount = u.getDogProfiles().size() + " " + u.getDogProfiles().get(0).getbreed();
@@ -63,18 +63,16 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     //get length of array list
     public int getItemCount()
     {
-        return resultsList.size();
+        return favoritesList.size();
     }
 
     //stores and recycles views as they are scrolled off the screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView profileName, amountDogs;
         public ImageButton favoriteButton, messageButton;
 
         //constructor
-        public ViewHolder(View itemView)
-        {
+        public ViewHolder(View itemView) {
             super(itemView);
 
             //set on click listener for the current row in the recycler view
@@ -92,16 +90,13 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
         //when an element is clicked on
         @Override
-        public void onClick(View v)
-        {
-            if(v == itemView)
-            {
+        public void onClick(View v) {
+            if (v == itemView) {
                 //load the viewProfileActivity with user clicked on
                 Intent intent = new Intent(c, ViewProfileActivity.class);
                 intent.putExtra("USER_PROFILE", getItem(getPosition()));
 
                 c.startActivity(intent);
-
 
             }
             if (v == messageButton) {
@@ -109,48 +104,17 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
                 i.putExtra("USER_PROFILE", getItem(getPosition()));
                 c.startActivity(i);
             }
-            if(v == favoriteButton)
-            {
+            if (v == favoriteButton) {
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
-                ValueEventListener listener = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        ArrayList<User> newFavList = new ArrayList<User>();
-                        boolean isNew = true;
-                        for(DataSnapshot ds : snapshot.getChildren())
-                        {
-                            User currUser = ds.getValue(User.class);
-                            if(!currUser.getUserId().equals(resultsList.get(getPosition()).getUserId()))
-                            {
-                                newFavList.add(currUser);
-                            }
-                            else {
-                                isNew = false;
-                            }
-                        }
-                        if(isNew) {
-                            newFavList.add(resultsList.get(getPosition()));
-                        }
-                        ref.setValue(newFavList);
-
-
-                }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        //TODO
-                    }
-                };
-                ref.addListenerForSingleValueEvent(listener);
+                favoritesList.remove(getPosition());
+                ref.setValue(favoritesList);
+                notifyDataSetChanged();
             }
+
         }
 
-        User getItem(int id)
-        {
-            return resultsList.get(id);
+        User getItem(int id) {
+            return favoritesList.get(id);
         }
-
     }
-
-
 }

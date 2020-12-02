@@ -4,6 +4,7 @@ import android.R.layout;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,7 +71,7 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
         List<String> states = new ArrayList<String>();
 
         //add states
-        states.add("");
+        states.add("Select State");
         states.add("Alabama");
         states.add("Alaska");
         states.add("Arizona");
@@ -133,7 +135,7 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
         List<String> cities = new ArrayList<String>();
 
         //add cities
-        cities.add("");
+        cities.add("Select City");
         cities.add("Tyler");
         cities.add("Lindale");
 
@@ -145,7 +147,7 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
         humanGenderSpinner = findViewById(R.id.spinnerHumanGender);
         humanGenderSpinner.setOnItemSelectedListener(this);
         List<String> genders = new ArrayList<String>();
-        genders.add("");
+        genders.add("Select Gender");
         genders.add("Female");
         genders.add("Male");
         ArrayAdapter adapterHumanGender = new ArrayAdapter(this, layout.simple_spinner_item, genders);
@@ -454,54 +456,48 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         if(v == finish)
         {
-            //rewrite value to the database
-            //this is not checking if any values are empty or correct values! Will be changing soon//TODO
-            String name = editHumanName.getText().toString();
-            String gender = "";
-            if(humanGenderSpinner.getSelectedItem().toString().equals("Female"))
-            {
-                gender = "f";
-            }
-            else if(humanGenderSpinner.getSelectedItem().toString().equals("Male"))
-            {
-                gender = "m";
-            }
-            String location = citySpinner.getSelectedItem().toString() + ", " + stateSpinner.getSelectedItem().toString();
-            String phone = editHumanPhone.getText().toString();
-            String bio = editHumanBio.getText().toString();
-            String birthdate = editHumanDateOfBirth.getText().toString();
-            String email = user.getEmail();
-            HumanProfile hp = new HumanProfile(name, gender, location, phone, bio, birthdate);
-            ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
-            String dogName = editDogName.getText().toString();
-            String dogBreed = dogBreedSpinner.getSelectedItem().toString();
-            String dogGender = "";
-            if(dogGenderSpinner.getSelectedItem().toString().equals("Female"))
-            {
-                dogGender = "f";
-            }
-            else if(dogGenderSpinner.getSelectedItem().toString().equals("Male"))
-            {
-                dogGender = "m";
-            }
-            boolean spayNeuter = false;
-            boolean shotsUpDate = false;
-            if(spayedNeutered.isChecked() == true)
-            {
-                spayNeuter = true;
-            }
-            if(shotsUpToDate.isChecked() == true)
-            {
-                shotsUpDate = true;
-            }
-            String dogBio = editDogBio.getText().toString();
-            String dogBirthdate = editDogDateOfBirth.getText().toString();
-            DogProfile dp  = new DogProfile(dogName, dogBreed, dogGender, spayNeuter, shotsUpDate, dogBio, dogBirthdate);
-            dogProfiles.add(dp);
-            User newUser = new User(email, hp, dogProfiles, user.getUid());
-           myRef.child("users").child(user.getUid()).setValue(newUser);
+            if(checkValues()) {
+                //rewrite value to the database
+                //this is not checking if any values are empty or correct values! Will be changing soon//TODO
+                String name = editHumanName.getText().toString();
+                String gender = "";
+                if (humanGenderSpinner.getSelectedItem().toString().equals("Female")) {
+                    gender = "f";
+                } else if (humanGenderSpinner.getSelectedItem().toString().equals("Male")) {
+                    gender = "m";
+                }
+                String location = citySpinner.getSelectedItem().toString() + ", " + stateSpinner.getSelectedItem().toString();
+                String phone = PhoneNumberUtils.formatNumber(editHumanPhone.getText().toString());
+                String bio = editHumanBio.getText().toString();
+                String birthdate = editHumanDateOfBirth.getText().toString();
+                String email = user.getEmail();
+                HumanProfile hp = new HumanProfile(name, gender, location, phone, bio, birthdate);
+                ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
+                String dogName = editDogName.getText().toString();
+                String dogBreed = dogBreedSpinner.getSelectedItem().toString();
+                String dogGender = "";
+                if (dogGenderSpinner.getSelectedItem().toString().equals("Female")) {
+                    dogGender = "f";
+                } else if (dogGenderSpinner.getSelectedItem().toString().equals("Male")) {
+                    dogGender = "m";
+                }
+                boolean spayNeuter = false;
+                boolean shotsUpDate = false;
+                if (spayedNeutered.isChecked() == true) {
+                    spayNeuter = true;
+                }
+                if (shotsUpToDate.isChecked() == true) {
+                    shotsUpDate = true;
+                }
+                String dogBio = editDogBio.getText().toString();
+                String dogBirthdate = editDogDateOfBirth.getText().toString();
+                DogProfile dp = new DogProfile(dogName, dogBreed, dogGender, spayNeuter, shotsUpDate, dogBio, dogBirthdate);
+                dogProfiles.add(dp);
+                User newUser = new User(email, hp, dogProfiles, user.getUid());
+                myRef.child("users").child(user.getUid()).setValue(newUser);
 
-            startActivity(new Intent(CreateProfileActivity.this, MainActivity.class));
+                startActivity(new Intent(CreateProfileActivity.this, MainActivity.class));
+            }
         }
         if(v == editHumanDateOfBirth)
         {
@@ -569,5 +565,62 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public boolean checkValues()
+    {
+        boolean returnValue = true;
+
+        if(editHumanName.getText().toString().equals(""))
+        {
+            editHumanName.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(editHumanDateOfBirth.getText().toString().equals(""))
+        {
+            editHumanDateOfBirth.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(humanGenderSpinner.getSelectedItem().equals("Select Gender"))
+        {
+            ((TextView) humanGenderSpinner.getSelectedView()).setError("Must select a gender");
+            returnValue = false;
+        }
+        if(stateSpinner.getSelectedItem().equals("Select State"))
+        {
+            ((TextView) stateSpinner.getSelectedView()).setError("Must select a state");
+            returnValue = false;
+        }
+        if(citySpinner.getSelectedItem().equals("Select City"))
+        {
+            ((TextView) citySpinner.getSelectedView()).setError("Must select a city");
+            returnValue = false;
+        }
+        if(editHumanPhone.getText().toString().equals(""))
+        {
+            editHumanPhone.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(editDogName.getText().toString().equals(""))
+        {
+            editDogName.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(editDogDateOfBirth.getText().toString().equals(""))
+        {
+            editDogDateOfBirth.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(dogGenderSpinner.getSelectedItem().equals("Select Gender"))
+        {
+            ((TextView) dogGenderSpinner.getSelectedView()).setError("Must select a gender");
+            returnValue = false;
+        }
+        if(dogBreedSpinner.getSelectedItem().equals("Select Breed"))
+        {
+            ((TextView) dogBreedSpinner.getSelectedView()).setError("Must select a breed");
+            returnValue = false;
+        }
+        return returnValue;
     }
 }

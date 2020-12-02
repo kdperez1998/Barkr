@@ -3,7 +3,13 @@ package com.example.barkr;
 import android.R.layout;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +35,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -35,7 +49,7 @@ import java.util.List;
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
     EditText editHumanName, editHumanDateOfBirth, editPhoneNumber, editHumanBio, editDogDateOfBirth, editDogName, editDogBio;
-    ImageView profileImage, profilePicture;
+    ImageView humanImage;
     Button finish;
     Spinner stateSpinner, citySpinner, humanGenderSpinner, dogGenderSpinner, dogBreedSpinner;
     CheckBox spayedNeutered, shotsUpToDate;
@@ -49,6 +63,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     List<String> breeds = new ArrayList<String>();
     DatePickerDialog datePickerDialog;
     Toolbar toolbar;
+    int RESULT_LOAD_IMAGE = 1;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -62,6 +77,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        humanImage = findViewById(R.id.ImageofHuman);
+        humanImage.setImageResource(R.drawable.ic_image_white_36pt_3x);
+        humanImage.setOnClickListener(this);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -89,10 +108,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         //this is currently using sample values, will come back and put api values later
         stateSpinner = findViewById(R.id.Spinner_State);
         stateSpinner.setOnItemSelectedListener(this);
-        List<String> states = new ArrayList<String>();
+        states = new ArrayList<String>();
 
         //add states
-        states.add("");
+        states.add("Select State");
         states.add("Alabama");
         states.add("Alaska");
         states.add("Arizona");
@@ -143,8 +162,30 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         states.add("West Virginia");
         states.add("Wisconsin");
         states.add("Wyoming");
+/*
+        try
+        {
+            //parsing a CSV file into BufferedReader class constructor
+            InputStream is = this.getResources().openRawResource(this.getResources().getIdentifier("us_cities_states_countries", "raw", getPackageName()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            while ((br.readLine()) != null)   //returns a Boolean value
+            {      // use comma as separator
+                String line = br.readLine();
+                String[] values = line.split("\\|");
+                for(String value : values)
+                {
+                    System.out.println(value);
+                }
+                System.out.println();
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
 
+ */
         ArrayAdapter adapterStates = new ArrayAdapter(this, layout.simple_spinner_item, states);
         adapterStates.setDropDownViewResource(layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(adapterStates);
@@ -155,7 +196,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         citySpinner.setOnItemSelectedListener(this);
 
         //add cities
-        cities.add("");
+        cities.add("Select City");
         cities.add("Tyler");
         cities.add("Lindale");
 
@@ -167,7 +208,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         humanGenderSpinner = findViewById(R.id.spinnerHumanGender);
         humanGenderSpinner.setOnItemSelectedListener(this);
         genders = new ArrayList<String>();
-        genders.add("");
+        genders.add("Select Gender");
         genders.add("Female");
         genders.add("Male");
         ArrayAdapter adapterHumanGender = new ArrayAdapter(this, layout.simple_spinner_item, genders);
@@ -185,7 +226,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         breeds = new ArrayList<String>();
 
         //add all breeds from AKC website, manually added since an API was not found in time
-        breeds.add("");
+        breeds.add("Select breed");
         breeds.add("Affenpinscher");
         breeds.add("Afghan Hound");
         breeds.add("Airedale Terrier");
@@ -480,6 +521,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userRef = rootRef.child("users").child(user.getUid());
+
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -494,6 +536,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     String[] location = userValue.getHumanProfile().getlocation().split(", ");
                     String city = location[0];
                     String state = location[1];
+                    System.out.println(state);
                     String humanGender = userValue.getHumanProfile().getgender();
                     //find where the spinner will need to be selected to pre load the value and load the value
                     //cities
@@ -506,8 +549,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         }
                     }
                     citySpinner.setSelection(indexCities);
-                    int indexStates = 0;
                     //states
+                    int indexStates = 0;
                     for(int i = 0; i < states.size(); i++)
                     {
                         if(states.get(i).equals(state))
@@ -515,6 +558,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                             indexStates = i;
                         }
                     }
+                    stateSpinner.setSelection(indexStates);
                     //gender for human
                     int indexHumanGender = 0;
                     for(int i = 0; i < genders.size(); i++)
@@ -581,56 +625,50 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if(v == finish)
         {
-            //rewrite value to the database
-            //this is not checking if any values are empty or correct values! Will be changing soon//TODO
-            String name = editHumanName.getText().toString();
-            String gender = "";
-            if(humanGenderSpinner.getSelectedItem().toString().equals("Female"))
-            {
-                gender = "f";
-            }
-            else if(humanGenderSpinner.getSelectedItem().toString().equals("Male"))
-            {
-                gender = "m";
-            }
-            String location = citySpinner.getSelectedItem().toString() + ", " + stateSpinner.getSelectedItem().toString();
-            String phone = editPhoneNumber.getText().toString();
-            String bio = editHumanBio.getText().toString();
-            String birthdate = editHumanDateOfBirth.getText().toString();
-            String email = user.getEmail();
-            HumanProfile hp = new HumanProfile(name, gender, location, phone, bio, birthdate);
-            ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
-            String dogName = editDogName.getText().toString();
-            String dogBreed = dogBreedSpinner.getSelectedItem().toString();
-            String dogGender = "";
-            if(dogGenderSpinner.getSelectedItem().toString().equals("Female"))
-            {
-                dogGender = "f";
-            }
-            else if(dogGenderSpinner.getSelectedItem().toString().equals("Male"))
-            {
-                dogGender = "m";
-            }
-            boolean spayNeuter = false;
-            boolean shotsUpDate = false;
-            if(spayedNeutered.isChecked() == true)
-            {
-                spayNeuter = true;
-            }
-            if(shotsUpToDate.isChecked() == true)
-            {
-                shotsUpDate = true;
-            }
-            String dogBio = editDogBio.getText().toString();
-            String dogBirthdate = editDogDateOfBirth.getText().toString();
-            DogProfile dp  = new DogProfile(dogName, dogBreed, dogGender, spayNeuter, shotsUpDate, dogBio, dogBirthdate);
-            dogProfiles.add(dp);
-            User newUser = new User(email, hp, dogProfiles, user.getUid());
-            myRef.child("users").child(user.getUid()).setValue(newUser);
+            if(checkValues()) {
+                //rewrite value to the database
+                //this is not checking if any values are empty or correct values! Will be changing soon//TODO
+                String name = editHumanName.getText().toString();
+                String gender = "";
+                if (humanGenderSpinner.getSelectedItem().toString().equals("Female")) {
+                    gender = "f";
+                } else if (humanGenderSpinner.getSelectedItem().toString().equals("Male")) {
+                    gender = "m";
+                }
+                String location = citySpinner.getSelectedItem().toString() + ", " + stateSpinner.getSelectedItem().toString();
+                String phone = PhoneNumberUtils.formatNumber(editPhoneNumber.getText().toString());
+                String bio = editHumanBio.getText().toString();
+                String birthdate = editHumanDateOfBirth.getText().toString();
+                String email = user.getEmail();
+                HumanProfile hp = new HumanProfile(name, gender, location, phone, bio, birthdate);
+                ArrayList<DogProfile> dogProfiles = new ArrayList<DogProfile>();
+                String dogName = editDogName.getText().toString();
+                String dogBreed = dogBreedSpinner.getSelectedItem().toString();
+                String dogGender = "";
+                if (dogGenderSpinner.getSelectedItem().toString().equals("Female")) {
+                    dogGender = "f";
+                } else if (dogGenderSpinner.getSelectedItem().toString().equals("Male")) {
+                    dogGender = "m";
+                }
+                boolean spayNeuter = false;
+                boolean shotsUpDate = false;
+                if (spayedNeutered.isChecked() == true) {
+                    spayNeuter = true;
+                }
+                if (shotsUpToDate.isChecked() == true) {
+                    shotsUpDate = true;
+                }
+                String dogBio = editDogBio.getText().toString();
+                String dogBirthdate = editDogDateOfBirth.getText().toString();
+                DogProfile dp = new DogProfile(dogName, dogBreed, dogGender, spayNeuter, shotsUpDate, dogBio, dogBirthdate);
+                dogProfiles.add(dp);
+                User newUser = new User(email, hp, dogProfiles, user.getUid());
+                myRef.child("users").child(user.getUid()).setValue(newUser);
 
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("FRAGMENT_TO_LOAD", 3);
-            startActivity(intent);
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("FRAGMENT_TO_LOAD", 3);
+                startActivity(intent);
+            }
         }
         if(v == editHumanDateOfBirth)
         {
@@ -674,8 +712,32 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
+
+        if(v == humanImage)
+        {
+            Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, RESULT_LOAD_IMAGE);
+        }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null)
+        {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            ImageView imageView = (ImageView) findViewById(R.id.ImageofHuman);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }
+    }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
@@ -702,7 +764,58 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     public boolean checkValues()
     {
-        boolean returnValue = false;
+        boolean returnValue = true;
+
+        if(editHumanName.getText().toString().equals(""))
+        {
+            editHumanName.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(editHumanDateOfBirth.getText().toString().equals(""))
+        {
+            editHumanDateOfBirth.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(humanGenderSpinner.getSelectedItem().equals("Select Gender"))
+        {
+            ((TextView) humanGenderSpinner.getSelectedView()).setError("Must select a gender");
+            returnValue = false;
+        }
+        if(stateSpinner.getSelectedItem().equals("Select State"))
+        {
+            ((TextView) stateSpinner.getSelectedView()).setError("Must select a state");
+            returnValue = false;
+        }
+        if(citySpinner.getSelectedItem().equals("Select City"))
+        {
+            ((TextView) citySpinner.getSelectedView()).setError("Must select a city");
+            returnValue = false;
+        }
+        if(editPhoneNumber.getText().toString().equals(""))
+        {
+            editPhoneNumber.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(editDogName.getText().toString().equals(""))
+        {
+            editDogName.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(editDogDateOfBirth.getText().toString().equals(""))
+        {
+            editDogDateOfBirth.setError("Cannot be left blank");
+            returnValue = false;
+        }
+        if(dogGenderSpinner.getSelectedItem().equals("Select Gender"))
+        {
+            ((TextView) dogGenderSpinner.getSelectedView()).setError("Must select a gender");
+            returnValue = false;
+        }
+        if(dogBreedSpinner.getSelectedItem().equals("Select Breed"))
+        {
+            ((TextView) dogBreedSpinner.getSelectedView()).setError("Must select a breed");
+            returnValue = false;
+        }
         return returnValue;
     }
 
@@ -713,4 +826,5 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

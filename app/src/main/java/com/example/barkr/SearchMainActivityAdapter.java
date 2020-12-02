@@ -9,7 +9,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -69,7 +77,6 @@ public class SearchMainActivityAdapter extends RecyclerView.Adapter<SearchMainAc
             favoriteButton = (ImageButton) itemView.findViewById(R.id.favoriteButton);
             favoriteButton.setOnClickListener(this);
             profilePicture = (ImageView) itemView.findViewById(R.id.ProfilePicture);
-            profilePicture.setOnClickListener(this);
 
             //set on click listener for the current row in the recycler view
             itemView.setOnClickListener(this);
@@ -87,6 +94,38 @@ public class SearchMainActivityAdapter extends RecyclerView.Adapter<SearchMainAc
 
                 c.startActivity(intent);
 
+            }
+            if(v == favoriteButton)
+            {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
+                ValueEventListener listener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ArrayList<User> newFavList = new ArrayList<User>();
+                        boolean isNew = true;
+                        for(DataSnapshot ds : snapshot.getChildren())
+                        {
+                            User currUser = ds.getValue(User.class);
+                            if(!currUser.getUserId().equals(userList.get(getPosition()).getUserId()))
+                            {
+                                newFavList.add(currUser);
+                            }
+                            else {
+                                isNew = false;
+                            }
+                        }
+                        if(isNew) {
+                            newFavList.add(userList.get(getPosition()));
+                        }
+                        ref.setValue(newFavList);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        //TODO
+                    }
+                };
+                ref.addListenerForSingleValueEvent(listener);
             }
         }
     }

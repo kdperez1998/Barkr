@@ -2,21 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/ProfilePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:foregroundTintMode="add"
+        app:tint="@color/barkrRed"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_person_white_48pt_3x"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/ProfileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="ProfileName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfilePicture" />
@@ -25,18 +30,25 @@
         android:id="@+id/DogAmount"
         android:layout_width="57dp"
         android:layout_height="19dp"
+        android:layout_marginStart="8dp"
         android:text="DogAmount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfileName" />
 
-    <ImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/favoriteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toEndOf="@+id/DogAmount"
-        app:layout_constraintTop_toBottomOf="@+id/ProfilePicture"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_favorite_border_3x"
+        android:tint="@color/barkrRed"
+
+        app:backgroundTint="@color/cardview_light_background"
+        app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePicture" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

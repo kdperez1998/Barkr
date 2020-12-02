@@ -20,279 +20,268 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/view_profile_toolbar" />
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="70dp"
-        android:verticalScrollbarPosition="defaultPosition"
-        android:visibility="visible"
-        tools:context=".ViewOwnProfile">
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/FavoriteButton"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="4dp"
-            android:clickable="true"
-            android:contentDescription="@string/FloatingEditButton"
-            android:focusable="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_favorite_border_3x"
-            android:tint="@color/barkrRed"
-            app:backgroundTint="@color/cardview_light_background"
-            app:fabSize="normal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/MessagingButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:clickable="true"
-            android:longClickable="false"
-            android:src="@android:drawable/stat_notify_chat"
-            android:tint="@color/barkrRed"
-            app:backgroundTint="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageofownUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
-            android:layout_marginLeft="76dp"
-            android:layout_marginTop="72dp"
-            android:layout_marginEnd="76dp"
-            android:layout_marginRight="76dp"
-            android:contentDescription="@string/ImageofownUser"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/TextViewUser"
-            android:layout_width="102dp"
-            android:layout_height="27dp"
-            android:layout_marginTop="80dp"
-            android:gravity="center_horizontal"
-            android:text="@string/Owner_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageofownUser" />
-
-        <TextView
-            android:id="@+id/UsersGenderAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Gender, Age"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextViewUser" />
-
-        <TextView
-            android:id="@+id/textViewLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/location"
-            android:textColor="@color/barkrRed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/UsersGenderAge" />
-
-        <TextView
-            android:id="@+id/TextDisplaysUsersCityState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="8dp"
-            android:text="City, State"
-            app:layout_constraintStart_toEndOf="@+id/textViewLocation"
-            app:layout_constraintTop_toBottomOf="@+id/UsersGenderAge" />
-
-        <TextView
-            android:id="@+id/DisplaysUsersContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/contact"
-            android:textColor="@color/barkrRed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLocation" />
-
-        <TextView
-            android:id="@+id/TextDisplaysContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="80dp"
-            android:text="Contact Info"
+            android:padding="70dp"
+            android:verticalScrollbarPosition="defaultPosition"
             android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysUsersCityState" />
+            tools:context=".ViewOwnProfile">
 
-        <TextView
-            android:id="@+id/TextPets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/pets"
-            android:textColor="@color/barkrRed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysContact" />
 
-        <TextView
-            android:id="@+id/TextdisplaysNumofPets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="145dp"
-            android:text="@string/numberofpets"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysContact" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/FavoriteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:clickable="true"
+                android:contentDescription="@string/FloatingEditButton"
+                android:focusable="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_favorite_border_3x"
+                android:tint="@color/barkrRed"
+                app:backgroundTint="@color/cardview_light_background"
+                app:fabSize="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/TextDislaysOwnersBio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="310dp"
-            android:layout_marginEnd="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/MessagingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
+                android:longClickable="false"
+                android:src="@android:drawable/stat_notify_chat"
+                android:tint="@color/barkrRed"
+                app:backgroundTint="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageViewofPet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="100dp"
-            android:contentDescription="@string/PetsImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDislaysOwnersBio"
-            tools:src="@tools:sample/avatars" />
+            <ImageView
+                android:id="@+id/imageofownUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
+                android:contentDescription="@string/ImageofownUser"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/TextdiplaysPetsName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:text="@string/pet_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewofPet" />
+            <TextView
+                android:id="@+id/TextViewUser"
+                android:layout_width="102dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="80dp"
+                android:gravity="center_horizontal"
+                android:text="@string/Owner_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageofownUser" />
 
-        <TextView
-            android:id="@+id/TextDisplaysPetsGenderAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:gravity="center_horizontal"
-            android:text="Gender, Age"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextdiplaysPetsName" />
+            <TextView
+                android:id="@+id/UsersGenderAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_horizontal"
+                android:text="Gender, Age"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextViewUser" />
 
-        <TextView
-            android:id="@+id/TextDisplayBreed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:text="@string/breed"
-            android:textColor="@color/barkrRed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
+            <TextView
+                android:id="@+id/textViewLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/location"
+                android:textColor="@color/barkrRed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/UsersGenderAge" />
 
-        <TextView
-            android:id="@+id/TextDisplaysBreed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="160dp"
-            android:text="@string/breed"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
+            <TextView
+                android:id="@+id/TextDisplaysUsersCityState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="8dp"
+                android:text="City, State"
+                app:layout_constraintStart_toEndOf="@+id/textViewLocation"
+                app:layout_constraintTop_toBottomOf="@+id/UsersGenderAge" />
 
-        <TextView
-            android:id="@+id/TextSpayedNuetered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/spayed_neutered"
-            android:textColor="@color/barkrRed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplayBreed" />
+            <TextView
+                android:id="@+id/DisplaysUsersContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/contact"
+                android:textColor="@color/barkrRed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLocation" />
 
-        <TextView
-            android:id="@+id/TextDisplaysSpayedNeutered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginEnd="100dp"
-            android:text="@string/displayspayed_neutered"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
+            <TextView
+                android:id="@+id/TextDisplaysContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="Contact Info"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@+id/DisplaysUsersContact"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplaysUsersCityState" />
 
-        <TextView
-            android:id="@+id/TextShotsUptoDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Shots Up To Date"
-            android:textColor="@color/barkrRed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextSpayedNuetered" />
+            <TextView
+                android:id="@+id/TextPets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/pets"
+                android:textColor="@color/barkrRed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplaysContact" />
 
-        <TextView
-            android:id="@+id/TextDisplaysShotsUpToDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="100dp"
-            android:text="@string/shots_up_to_date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysSpayedNeutered" />
+            <TextView
+                android:id="@+id/TextdisplaysNumofPets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/numberofpets"
+                app:layout_constraintStart_toEndOf="@+id/TextPets"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplaysContact" />
 
-        <TextView
-            android:id="@+id/textDisplaysBio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
-            android:text="@string/Petsbio"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextDisplaysShotsUpToDate" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/TextDislaysOwnersBio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="310dp"
+                android:layout_marginEnd="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewofPet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:contentDescription="@string/PetsImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextdisplaysNumofPets"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/TextdiplaysPetsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal"
+                android:text="@string/pet_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewofPet" />
+
+            <TextView
+                android:id="@+id/TextDisplaysPetsGenderAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_horizontal"
+                android:text="Gender, Age"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextdiplaysPetsName" />
+
+            <TextView
+                android:id="@+id/TextDisplayBreed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/breed"
+                android:textColor="@color/barkrRed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
+
+            <TextView
+                android:id="@+id/TextDisplaysBreed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/breed"
+                app:layout_constraintStart_toEndOf="@+id/TextDisplayBreed"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplaysPetsGenderAge" />
+
+            <TextView
+                android:id="@+id/TextSpayedNuetered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/spayed_neutered"
+                android:textColor="@color/barkrRed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplayBreed" />
+
+            <TextView
+                android:id="@+id/TextDisplaysSpayedNeutered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/displayspayed_neutered"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/TextSpayedNuetered"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplaysBreed" />
+
+            <TextView
+                android:id="@+id/TextShotsUptoDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="8dp"
+                android:text="Shots Up To Date"
+                android:textColor="@color/barkrRed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextSpayedNuetered" />
+
+            <TextView
+                android:id="@+id/TextDisplaysShotsUpToDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/shots_up_to_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/TextShotsUptoDate"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplaysSpayedNeutered" />
+
+            <TextView
+                android:id="@+id/textDisplaysBio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/Petsbio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextDisplaysShotsUpToDate" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

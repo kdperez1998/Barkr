@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         email = findViewById(R.id.emailInput);
         password = findViewById(R.id.passwordInput);
     }
-
+/*
     @Override
     public void onStart()
     {
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
-
+*/
     private void loginWithEmail(String email, String password)
     {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

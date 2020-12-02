@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class ViewProfileActivity extends AppCompatActivity implements View.OnClickListener {
     User userValue;
     TextView textHumanName, textHumanGenderAge, textLocation, textContact, textNumberPets, textHumanBio, textDistance,
@@ -45,6 +47,12 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         textSpayedNeutered = findViewById(R.id.TextDisplaysSpayedNeutered);
         textShotsUpToDate = findViewById(R.id.TextDisplaysShotsUpToDate);
         textPetBio = findViewById(R.id.textDisplaysBio);
+
+        messageButton = findViewById(R.id.MessagingButton);
+        messageButton.setOnClickListener(this);
+
+        favoritesButton = findViewById(R.id.FavoriteButton);
+        favoritesButton.setOnClickListener(this);
 
         if(getIntent().getExtras() != null)
         {
@@ -109,8 +117,50 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
 
     }
     @Override
-    public void onClick(View v)
-    {
-        //TODO implement on click listener for buttons to add favorites or to message a user
+    public void onClick(View v) {
+        if (v == messageButton) {
+            Intent i = new Intent(ViewProfileActivity.this, MessagingActivity.class);
+            i.putExtra("USER_PROFILE", userValue);
+            startActivity(i);
+        }
+        if (v == favoritesButton) {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
+            ValueEventListener listener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        ArrayList<User> newFavList = new ArrayList<User>();
+                        boolean isNew = true;
+                        for(DataSnapshot ds : snapshot.getChildren())
+                        {
+                            User currUser = ds.getValue(User.class);
+                            if(!currUser.getUserId().equals(userValue.getUserId()))
+                            {
+                                newFavList.add(currUser);
+                            }
+                            else {
+                                isNew = false;
+                            }
+                        }
+                        if(isNew) {
+                            newFavList.add(userValue);
+                        }
+                        ref.setValue(newFavList);
+                    }
+                    else
+                    {
+                        ArrayList<User> newFavList = new ArrayList<User>();
+                        newFavList.add(userValue);
+                        ref.setValue(newFavList);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    //TODO
+                }
+            };
+            ref.addListenerForSingleValueEvent(listener);
+        }
     }
 }

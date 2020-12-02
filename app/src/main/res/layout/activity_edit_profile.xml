@@ -39,14 +39,15 @@
 
             <ImageView
                 android:id="@+id/ImageofHuman"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="75dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:contentDescription="@string/imageofHuman"
+                app:tint="@color/DarkGrayAccent"
                 android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@android:drawable/ic_menu_gallery" />
 
             <TextView
                 android:id="@+id/textHumanName"
@@ -89,10 +90,10 @@
 
             <EditText
                 android:id="@+id/EditDateofBirth"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:contentDescription="@string/date_of_birth_for_owner"
                 android:ems="10"
                 android:hint="Select Date..."
@@ -116,12 +117,12 @@
 
             <Spinner
                 android:id="@+id/Spinner_State"
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="140dp"
                 android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_state"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerHumanGender" />
 
             <TextView
@@ -138,12 +139,13 @@
 
             <Spinner
                 android:id="@+id/spinner_City"
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="140dp"
                 android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
+                app:layout_constraintStart_toEndOf="@+id/textCity"
                 app:layout_constraintTop_toBottomOf="@+id/Spinner_State" />
 
 
@@ -207,11 +209,10 @@
                 android:id="@+id/imageofPet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="75dp"
-                android:layout_marginLeft="75dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editBio"
+                app:layout_constraintTop_toBottomOf="@+id/divider2"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -268,7 +269,7 @@
 
             <Spinner
                 android:id="@+id/spinnerGender"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="25dp"
@@ -392,13 +393,24 @@
 
             <Spinner
                 android:id="@+id/spinnerHumanGender"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
                 android:visibility="visible"
                 app:layout_constraintStart_toEndOf="@+id/TextViewHumanGender"
                 app:layout_constraintTop_toBottomOf="@+id/EditDateofBirth" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#686868"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editBio" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

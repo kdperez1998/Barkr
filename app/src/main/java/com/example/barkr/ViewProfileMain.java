@@ -37,7 +37,7 @@ public class ViewProfileMain extends Fragment implements View.OnClickListener
     User userValue;
     TextView textHumanName, textHumanGenderAge, textLocation, textContact, textNumberPets, textHumanBio, textDistance,
         textPetName, textPetGenderAge, textPetBreed, textSpayedNeutered, textShotsUpToDate, textPetBio;
-    FloatingActionButton editProfile, moreOptions;
+    FloatingActionButton editProfile, moreOptions, favoritesButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +71,9 @@ public class ViewProfileMain extends Fragment implements View.OnClickListener
 
         moreOptions = getView().findViewById(R.id.moreOptionsButton);
         moreOptions.setOnClickListener(this);
+
+        favoritesButton = getView().findViewById(R.id.favoritesButton);
+        favoritesButton.setOnClickListener(this);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
@@ -176,6 +179,10 @@ public class ViewProfileMain extends Fragment implements View.OnClickListener
         {
             showMenu(v);
         }
+        if(v == favoritesButton)
+        {
+            startActivity(new Intent(getActivity(), FavoritesListActivity.class));
+        }
     }
 
     private void showMenu(View v)
@@ -192,6 +199,7 @@ public class ViewProfileMain extends Fragment implements View.OnClickListener
                         return true;
                     case R.id.logout:
                         FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
                         return true;
                     case R.id.changeEmail:
 

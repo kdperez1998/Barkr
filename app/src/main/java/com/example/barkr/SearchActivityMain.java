@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,10 +38,10 @@ import java.util.ArrayList;
 
 public class SearchActivityMain extends Fragment implements View.OnClickListener{
 
-    RecyclerView resultsRecycler;
+    RecyclerView recyclerView;
     ArrayList<User> userList;
-    static SearchMainActivityAdapter adapter;
-    Button advancedSearch;
+    SearchMainActivityAdapter adapter;
+    FloatingActionButton advancedSearch;
     FirebaseUser user;
     EditText searchBar;
 
@@ -50,6 +51,7 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.activity_search_main, container, false);
         return view;
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -70,9 +72,12 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userList = new ArrayList<User>();
                 for(DataSnapshot userSnapshot: snapshot.getChildren())
                 {
-                    userList.add(userSnapshot.getValue(User.class));
+                    if(userSnapshot.getValue(User.class)!= null) {
+                        userList.add(userSnapshot.getValue(User.class));
+                    }
                 }
                 for(int i = 0; i<userList.size();i++)
                 {
@@ -81,11 +86,16 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
                         userList.remove(i);
                     }
                 }
-                resultsRecycler = (RecyclerView) getView().findViewById(R.id.RecyclerViewSearchMain);
-                adapter = new SearchMainActivityAdapter(getActivity(), userList);
-                resultsRecycler.setAdapter(adapter);
-                //here the second attribute for GridLayoutManager is 2 because this is the amount of columns we will have in the recycler view
-                resultsRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+                if(userList != null) {
+                    if(getView()!= null) {
+                        recyclerView = getView().findViewById(R.id.RecyclerViewSearchMain);
+                        adapter = new SearchMainActivityAdapter(getActivity(), userList);
+                        recyclerView.setAdapter(adapter);
+                        //here the second attribute for GridLayoutManager is 2 because this is the amount of columns we will have in the recycler view
+                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                    }
+                }
             }
 
             @Override
@@ -93,6 +103,9 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
                 Log.w("SearchActivityMain", "loadPost:onCancelled", error.toException());
             }
         });
+
+
+
 
 
         advancedSearch = getView().findViewById(R.id.AdvancedSearchButton);
@@ -142,19 +155,19 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
 */
 
     public void searchByName(String searchName) {
-
         //String testName = "Cody";
         //users
 
         final String name = searchName.toLowerCase();
-        final ArrayList<User> allUsers = new ArrayList<User>();
-        final ArrayList<User> matchedUsers = new ArrayList<User>();
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference().child("users");
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<User> allUsers = new ArrayList<User>();
+                ArrayList<User> matchedUsers = new ArrayList<User>();
                 for(DataSnapshot userSnapshot: snapshot.getChildren())
                 {
                     allUsers.add(userSnapshot.getValue(User.class));
@@ -178,9 +191,8 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
                 Log.w("SearchActivityMain nameSearch", "loadPost:onCancelled", error.toException());
             }
         });
-
-
     }
+
     @Override
     public void onClick(View v)
     {
