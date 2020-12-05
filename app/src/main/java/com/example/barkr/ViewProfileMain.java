@@ -194,9 +194,6 @@ public class ViewProfileMain extends Fragment implements View.OnClickListener
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch(item.getItemId()){
-                    case R.id.back:
-                        //TODO ???
-                        return true;
                     case R.id.logout:
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getActivity(), LoginActivity.class));

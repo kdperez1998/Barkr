@@ -101,6 +101,7 @@ public class SearchMainActivityAdapter extends RecyclerView.Adapter<SearchMainAc
                 ValueEventListener listener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        DatabaseReference dRef = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
                         ArrayList<User> newFavList = new ArrayList<User>();
                         boolean isNew = true;
                         for(DataSnapshot ds : snapshot.getChildren())
@@ -117,7 +118,7 @@ public class SearchMainActivityAdapter extends RecyclerView.Adapter<SearchMainAc
                         if(isNew) {
                             newFavList.add(userList.get(getPosition()));
                         }
-                        ref.setValue(newFavList);
+                        dRef.setValue(newFavList);
                     }
 
                     @Override

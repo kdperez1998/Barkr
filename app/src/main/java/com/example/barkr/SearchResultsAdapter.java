@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>
 {
@@ -117,6 +118,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         ArrayList<User> newFavList = new ArrayList<User>();
                         boolean isNew = true;
+                        DatabaseReference dRef = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
                         for(DataSnapshot ds : snapshot.getChildren())
                         {
                             User currUser = ds.getValue(User.class);
@@ -131,7 +133,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
                         if(isNew) {
                             newFavList.add(resultsList.get(getPosition()));
                         }
-                        ref.setValue(newFavList);
+                        dRef.setValue(newFavList);
+                        notifyDataSetChanged();
 
 
                 }

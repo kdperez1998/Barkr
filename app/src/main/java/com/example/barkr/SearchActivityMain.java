@@ -44,6 +44,7 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
     FloatingActionButton advancedSearch;
     FirebaseUser user;
     EditText searchBar;
+    String searchName;
 
 
     @Override
@@ -57,72 +58,73 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        userList = new ArrayList<User>();
-
         user = FirebaseAuth.getInstance().getCurrentUser();
-
-        //System.out.println(user.getUid());
-        //HumanProfile hp = new HumanProfile("name", "f", "Tyler, Texas", "903372", "hello", "12/12/1222");
-        //DogProfile dogProfile = new DogProfile("pet", "corgi", "f", false, false, "hello", "12/12/1212");
-        //ArrayList<DogProfile> dp = new ArrayList<DogProfile>();
-        //dp.add(dogProfile);
-        //userList.add(new User(user.getEmail(), hp, dp, user.getUid()));
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference().child("users");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userList = new ArrayList<User>();
-                for(DataSnapshot userSnapshot: snapshot.getChildren())
-                {
-                    if(userSnapshot.getValue(User.class)!= null) {
-                        userList.add(userSnapshot.getValue(User.class));
-                    }
-                }
-                for(int i = 0; i<userList.size();i++)
-                {
-                    if (userList.get(i).getUserId().equals(user.getUid()))
-                    {
-                        userList.remove(i);
-                    }
-                }
-
-                if(userList != null) {
-                    if(getView()!= null) {
-                        recyclerView = getView().findViewById(R.id.RecyclerViewSearchMain);
-                        adapter = new SearchMainActivityAdapter(getActivity(), userList);
-                        recyclerView.setAdapter(adapter);
-                        //here the second attribute for GridLayoutManager is 2 because this is the amount of columns we will have in the recycler view
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("SearchActivityMain", "loadPost:onCancelled", error.toException());
-            }
-        });
-
-
-
 
 
         advancedSearch = getView().findViewById(R.id.AdvancedSearchButton);
         advancedSearch.setOnClickListener(this);
 
-        searchBar = getView().findViewById(R.id.SearchBar);
+        searchBar = (EditText) getView().findViewById(R.id.SearchBar);
         searchBar.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER))
                 {
-                    searchByName(searchBar.getText().toString());
+                    searchName = searchBar.getText().toString();
+                    searchByName();
                     return true;
                 }
                 return false;
             }
         });
+
+        if(user == null)
+        {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+        }
+
+        else {
+            //System.out.println(user.getUid());
+            //HumanProfile hp = new HumanProfile("name", "f", "Tyler, Texas", "903372", "hello", "12/12/1222");
+            //DogProfile dogProfile = new DogProfile("pet", "corgi", "f", false, false, "hello", "12/12/1212");
+            //ArrayList<DogProfile> dp = new ArrayList<DogProfile>();
+            //dp.add(dogProfile);
+            //userList.add(new User(user.getEmail(), hp, dp, user.getUid()));
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference ref = database.getReference().child("users");
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    userList = new ArrayList<User>();
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        if (userSnapshot.getValue(User.class) != null) {
+                            userList.add(userSnapshot.getValue(User.class));
+                        }
+                    }
+                    for (int i = 0; i < userList.size(); i++) {
+                        if (userList.get(i).getUserId().equals(user.getUid())) {
+                            userList.remove(i);
+                        }
+                    }
+
+                    if (userList != null) {
+                        if (getView() != null) {
+                            recyclerView = getView().findViewById(R.id.RecyclerViewSearchMain);
+                            adapter = new SearchMainActivityAdapter(getActivity(), userList);
+                            recyclerView.setAdapter(adapter);
+                            //here the second attribute for GridLayoutManager is 2 because this is the amount of columns we will have in the recycler view
+                            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.w("SearchActivityMain", "loadPost:onCancelled", error.toException());
+                }
+            });
+        }
+
     }
 
 
@@ -154,16 +156,13 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
     }
 */
 
-    public void searchByName(String searchName) {
+    public void searchByName() {
         //String testName = "Cody";
-        //users
-
-        final String name = searchName.toLowerCase();
-
+        //user
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference().child("users");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<User> allUsers = new ArrayList<User>();
@@ -174,7 +173,7 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
                 }
                 for(int i = 0; i<allUsers.size();i++)
                 {
-                    if (allUsers.get(i).getHumanProfile().getname().toLowerCase().equals(name))
+                    if (allUsers.get(i).getHumanProfile().getname().toLowerCase().equals(searchName.toLowerCase()))
                     {
                         matchedUsers.add(allUsers.get(i));
                     }
@@ -184,13 +183,17 @@ public class SearchActivityMain extends Fragment implements View.OnClickListener
                 intent.putExtra("SORTED_RESULTS", matchedUsers);
 
                 startActivity(intent);
+                ref.removeEventListener(this);
+
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w("SearchActivityMain nameSearch", "loadPost:onCancelled", error.toException());
             }
-        });
+        };
+        ref.addValueEventListener(listener);
     }
 
     @Override

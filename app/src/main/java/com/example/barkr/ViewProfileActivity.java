@@ -124,10 +124,11 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
             startActivity(i);
         }
         if (v == favoritesButton) {
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
+            DatabaseReference dRef = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
             ValueEventListener listener = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
                     if (snapshot.exists()) {
                         ArrayList<User> newFavList = new ArrayList<User>();
                         boolean isNew = true;
@@ -160,7 +161,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
                     //TODO
                 }
             };
-            ref.addListenerForSingleValueEvent(listener);
+            dRef.addListenerForSingleValueEvent(listener);
         }
     }
 }

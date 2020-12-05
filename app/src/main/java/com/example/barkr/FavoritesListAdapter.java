@@ -108,7 +108,6 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("favorites");
                 favoritesList.remove(getPosition());
                 ref.setValue(favoritesList);
-                notifyDataSetChanged();
             }
 
         }

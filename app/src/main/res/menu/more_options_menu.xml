@@ -6,8 +6,6 @@
     <item android:id="@+id/options"
         android:title="Options" >
         <menu>
-            <item android:id="@+id/back"
-                android:title="Back" />
             <item android:id="@+id/changePassword"
                 android:title="Send Password Reset Email" />
             <item android:id="@+id/changeEmail"

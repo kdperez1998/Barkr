@@ -34,7 +34,6 @@ public class FavoritesListActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_list);
 
-        userList = new ArrayList<User>();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
@@ -57,6 +56,7 @@ public class FavoritesListActivity extends AppCompatActivity implements View.OnC
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userList = new ArrayList<User>();
                 if (snapshot.exists()) {
                     User currentUser = snapshot.getValue(User.class);
                     for(DataSnapshot dataSnapshot : snapshot.child("favorites").getChildren())
@@ -80,7 +80,6 @@ public class FavoritesListActivity extends AppCompatActivity implements View.OnC
             }
         };
         ref.addListenerForSingleValueEvent(listener);
-
 
     }
 

@@ -35,6 +35,7 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
     EditText input;
     ListView listOfMessages;
     Toolbar toolbar;
+    DatabaseReference ref;
 
     private FirebaseListAdapter<ChatMessage> adapter;
 
@@ -45,6 +46,9 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
 
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.messageToolbar);
         setSupportActionBar(toolbar);
+
+        sendButton = findViewById(R.id.fab);
+        sendButton.setOnClickListener(this);
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,9 +61,6 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
         {
             userValue = (User) getIntent().getSerializableExtra("USER_PROFILE");
         }
-
-        sendButton = findViewById(R.id.fab);
-        sendButton.setOnClickListener(this);
 
         input = findViewById(R.id.input);
 
@@ -90,7 +91,7 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
         if(v == sendButton)
         {
             //create new message object and push it to both of the users messages reference
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
+            ref = FirebaseDatabase.getInstance().getReference().child("users");
             ValueEventListener listener = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

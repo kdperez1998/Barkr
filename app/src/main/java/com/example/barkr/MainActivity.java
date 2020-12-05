@@ -91,7 +91,6 @@ public  class MainActivity extends AppCompatActivity implements BottomNavigation
                 }
             };
             userRef.addListenerForSingleValueEvent(listener);
-
         }
         else
         {
